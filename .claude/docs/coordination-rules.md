@@ -6,7 +6,8 @@
    but must not make binding decisions outside their domain.
 3. **Conflict Resolution**: When two agents disagree, escalate to the shared
    parent. If no shared parent, escalate to `creative-director` for design
-   conflicts or `technical-director` for technical conflicts.
+   conflicts or `technical-director` for technical conflicts. Conflicts between Tier 1
+   directors go to `project-director`, who frames one decision for the user.
 4. **Change Propagation**: When a design change affects multiple domains, the
    `producer` agent coordinates the propagation.
 5. **No Unilateral Cross-Domain Changes**: An agent must never modify files

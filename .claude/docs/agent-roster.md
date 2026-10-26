@@ -9,6 +9,11 @@ Which model an agent runs on is set by the `model:` line in its own file;
 `model-tiers.md` lists the agents that pin one. Every other agent runs on the
 session's model.
 
+## Tier 0 -- Executive Director
+| Agent | Domain | When to Use |
+|-------|--------|-------------|
+| `project-director` | Whole project (총괄) | Project status, priorities, cross-director trade-offs, routing a request to the right agent or skill |
+
 ## Tier 1 -- Leadership Agents
 | Agent | Domain | When to Use |
 |-------|--------|-------------|

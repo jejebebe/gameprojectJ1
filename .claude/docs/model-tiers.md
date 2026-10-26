@@ -63,9 +63,9 @@ declares a tier. Whether the tier takes effect depends on how the skill starts
 (see the table at the top of this file).
 
 **Agent model tiers.** 30 agents use `model: inherit` and run on the session's
-model. 19 are pinned:
+model. 20 are pinned:
 
-- **opus (3):** `creative-director`, `producer`, `technical-director`. Under an
+- **opus (4):** `creative-director`, `producer`, `project-director`, `technical-director`. Under an
   Opus session an `opus` pin runs on the session's exact model, `[1m]` included,
   so it never gets a smaller window than its parent.
 - **sonnet (16):** `lead-programmer`, `prototyper`, `devops-engineer`,
