@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="CameraStats" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://src/player/camera_stats.gd" id="1_camstats"]
+
+[resource]
+script = ExtResource("1_camstats")
+look_ahead_distance = 60.0
+look_ahead_speed = 180.0

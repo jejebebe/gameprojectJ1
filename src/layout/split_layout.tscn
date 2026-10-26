@@ -1,0 +1,63 @@
+[gd_scene load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://src/layout/split_layout.gd" id="1_layout"]
+[ext_resource type="PackedScene" path="res://src/levels/test_gray_box.tscn" id="2_level"]
+[ext_resource type="PackedScene" path="res://src/ui/touch_controls.tscn" id="3_controls"]
+
+[node name="SplitLayout" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_layout")
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.12, 0.12, 0.16, 1)
+
+[node name="Column" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 13
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -180.0
+offset_right = 180.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="GameViewContainer" type="SubViewportContainer" parent="Column"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 320.0
+grow_horizontal = 2
+mouse_filter = 2
+stretch = true
+
+[node name="GameView" type="SubViewport" parent="Column/GameViewContainer"]
+handle_input_locally = false
+size = Vector2i(360, 320)
+render_target_update_mode = 4
+
+[node name="Level" parent="Column/GameViewContainer/GameView" instance=ExtResource("2_level")]
+
+[node name="TouchControls" parent="Column" instance=ExtResource("3_controls")]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -320.0
+grow_horizontal = 2
+grow_vertical = 0

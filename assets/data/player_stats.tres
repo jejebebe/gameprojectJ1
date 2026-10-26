@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="PlayerStats" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://src/player/player_stats.gd" id="1_stats"]
+
+[resource]
+script = ExtResource("1_stats")
+move_speed = 120.0
+jump_velocity = -380.0
+gravity = 900.0
+max_fall_speed = 400.0
+jump_cut_factor = 0.4

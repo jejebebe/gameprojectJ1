@@ -1,0 +1,114 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://src/ui/touch_controls.gd" id="1_controls"]
+
+[node name="TouchControls" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_controls")
+
+[node name="BottomCluster" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -274.0
+offset_bottom = -48.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 2
+
+[node name="LeftButton" type="Panel" parent="BottomCluster"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 116.0
+offset_right = 118.0
+offset_bottom = 226.0
+mouse_filter = 2
+
+[node name="Label" type="Label" parent="BottomCluster/LeftButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+text = "<"
+horizontal_alignment = 1
+vertical_alignment = 1
+mouse_filter = 2
+
+[node name="RightButton" type="Panel" parent="BottomCluster"]
+layout_mode = 0
+offset_left = 126.0
+offset_top = 116.0
+offset_right = 236.0
+offset_bottom = 226.0
+mouse_filter = 2
+
+[node name="Label" type="Label" parent="BottomCluster/RightButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+text = ">"
+horizontal_alignment = 1
+vertical_alignment = 1
+mouse_filter = 2
+
+[node name="JumpButton" type="Panel" parent="BottomCluster"]
+layout_mode = 0
+offset_left = 252.0
+offset_top = 116.0
+offset_right = 352.0
+offset_bottom = 226.0
+mouse_filter = 2
+
+[node name="Label" type="Label" parent="BottomCluster/JumpButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+text = "JUMP"
+horizontal_alignment = 1
+vertical_alignment = 1
+mouse_filter = 2
+
+[node name="AbilityButton" type="Panel" parent="BottomCluster"]
+layout_mode = 0
+offset_left = 180.0
+offset_right = 280.0
+offset_bottom = 100.0
+mouse_filter = 2
+
+[node name="Label" type="Label" parent="BottomCluster/AbilityButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+text = "ABILITY"
+horizontal_alignment = 1
+vertical_alignment = 1
+mouse_filter = 2
+
+[node name="MenuButton" type="Panel" parent="."]
+layout_mode = 0
+offset_left = 288.0
+offset_top = 8.0
+offset_right = 352.0
+offset_bottom = 56.0
+mouse_filter = 2
+
+[node name="Label" type="Label" parent="MenuButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+text = "MENU"
+horizontal_alignment = 1
+vertical_alignment = 1
+mouse_filter = 2

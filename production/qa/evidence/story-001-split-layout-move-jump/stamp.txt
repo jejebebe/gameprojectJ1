@@ -1,0 +1,13 @@
+Reviewed-Content-Hash: src/layout/split_layout.tscn c6c7be426be731ba59e025933df07b74d52cfdf8
+Reviewed-Content-Hash: src/layout/split_layout.gd 1ef2b0a746b71fb7f204ee38e03cf99365b43919
+Reviewed-Content-Hash: src/ui/touch_controls.tscn c62f33ee6590f685056e36eefa2e9da69f5e53f9
+Reviewed-Content-Hash: src/ui/touch_controls.gd 6ea4cf2d3e415be7d56502acbcfbb54489dda729
+Reviewed-Content-Hash: src/player/player.tscn 278d20f9d27495f16643fafbcb867e939bc9396a
+Reviewed-Content-Hash: src/player/player.gd 515358581120ba3cebb5296c3b58b2127c4d9cf9
+Reviewed-Content-Hash: src/player/player_stats.gd 4fd063bfb858c55d8f2db366d47334273ab992cf
+Reviewed-Content-Hash: src/player/camera_stats.gd 1c751c66a8a73e0209289c1717f1a09ed7019a8e
+Reviewed-Content-Hash: src/player/look_ahead_camera.gd da9324fbc90d57ce825b6d06954191b98159e641
+Reviewed-Content-Hash: assets/data/player_stats.tres becec452df868c21abfe96b3c1be775bfe5d3e27
+Reviewed-Content-Hash: assets/data/camera_stats.tres 5505d9e94fde2eff794068d6c7d44cfb34b88de0
+Reviewed-Content-Hash: src/levels/test_gray_box.tscn 6dac3c01ee88e5d483f0de09d2eac8c4f72f0c1f
+Reviewed-Content-Hash: project.godot ff5ccd3e7cd79c480d2ec46a03600f7c0cf9410b

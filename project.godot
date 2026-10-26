@@ -1,12 +1,17 @@
 ; Engine configuration file.
-; run/main_scene is intentionally unset: /dev-story or the developer sets it
-; once the first scene exists.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
 
 config_version=5
 
 [application]
 
 config/name="Jei's Adventure"
+run/main_scene="res://src/layout/split_layout.tscn"
 config/features=PackedStringArray("4.7", "GL Compatibility")
 
 [display]
@@ -26,5 +31,5 @@ enabled=PackedStringArray("res://addons/gdUnit4/plugin.cfg")
 
 [rendering]
 
-renderer/rendering_method="gl_compatibility"
 textures/canvas_textures/default_texture_filter=0
+renderer/rendering_method="gl_compatibility"

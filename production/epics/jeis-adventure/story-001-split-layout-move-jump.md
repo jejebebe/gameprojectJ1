@@ -1,12 +1,12 @@
 # Story 001: 세로 분할 화면과 이동·점프
 
 > **Epic**: jeis-adventure
-> **Status**: Ready
+> **Status**: Complete
 > **Layer**: Foundation
 > **Type**: Visual/Feel
 > **Estimate**: L
 > **Manifest Version**: N/A (minimal — no control manifest)
-> **Last Updated**: set by /dev-story when implementation begins
+> **Last Updated**: 2026-10-26
 
 ## Context
 
@@ -36,6 +36,7 @@
 - [ ] 이동 속도, 점프 높이 등 수치는 코드에 박지 않고 데이터 파일로 조정할 수 있다
 - [ ] 정밀한 점프를 연속으로 요구하지 않는 회색 상자 테스트 레벨에서 이동·점프를 해 볼 수 있다
 - [ ] 도트가 흐려지지 않고 선명하게 보인다 (정수 배율, Nearest 필터)
+- [ ] 카메라는 캐릭터가 바라보는 쪽을 더 많이 보여 준다 (오른쪽을 보면 캐릭터가 화면 왼쪽에 오고 오른쪽이 넓게 보임). 레벨 가장자리에서는 카메라가 레벨 밖을 보여 주지 않는다. 보정 거리와 전환 속도는 데이터 파일로 조정할 수 있다 (2026-10-26 사용자 피드백으로 추가)
 - [ ] 8~12세 아이 1~2명이 직접 해 보고, 난이도와 버튼 크기에 대한 관찰 기록을 `production/qa/evidence/`에 남긴다
 
 ---
@@ -60,16 +61,19 @@
 
 ## Files
 
-*Planned. `/dev-story` replaces this list with the files it changed.*
-
 - src/layout/split_layout.tscn
 - src/layout/split_layout.gd
 - src/ui/touch_controls.tscn
 - src/ui/touch_controls.gd
 - src/player/player.tscn
 - src/player/player.gd
+- src/player/player_stats.gd
+- src/player/camera_stats.gd
+- src/player/look_ahead_camera.gd
 - assets/data/player_stats.tres
+- assets/data/camera_stats.tres
 - src/levels/test_gray_box.tscn
+- project.godot
 
 ---
 
@@ -96,3 +100,12 @@
 
 - Depends on: None
 - Unlocks: `production/epics/jeis-adventure/story-002-health-fail-checkpoint.md`, `production/epics/jeis-adventure/story-007-menu-level-select.md`
+
+---
+
+## Completion Notes
+**Completed**: 2026-10-26
+**Criteria**: 8/10 passing. Deferred: 아이 시험 플레이 (사용자 결정, 당분간 하지 않음). Untested, accepted by the user: 도트 선명도 (실제 도트 그림이 없어 확인 불가) — 스토리 005로 이월
+**Deviations**: ADVISORY — 버튼 눌림 색(0.7)이 `touch_controls.gd:77`에 직접 적혀 있음. ADVISORY — 버튼 글자(JUMP, ABILITY, MENU)가 영어로 직접 적혀 있음 (다국어는 브리프 범위 밖, 아이콘 교체 여부는 미정). OUT OF SCOPE — `.godot/global_script_class_cache.cfg`가 엔진 가져오기로 바뀜, `.uid` 파일은 스크립트와 함께 커밋
+**Test Evidence**: 스크린샷 `production/qa/evidence/story-001-split-layout-move-jump/` (03~06), 서명 `production/qa/evidence/story-001-split-layout-move-jump-evidence.md`. 테스트 파일은 qa.level minimal이라 면제
+**Reviewed by**: self, no independent review (QL-TEST-COVERAGE, LP-CODE-REVIEW skipped — Solo mode; 구현 중 godot-gdscript-specialist가 엔진 API 점검)
