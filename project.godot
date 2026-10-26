@@ -6,7 +6,7 @@ config_version=5
 
 [application]
 
-config/name="Claude-Code-Game-Studios"
+config/name="Jei's Adventure"
 config/features=PackedStringArray("4.7", "GL Compatibility")
 
 [display]
