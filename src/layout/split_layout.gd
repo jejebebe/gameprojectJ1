@@ -10,6 +10,7 @@ const KEY_BINDINGS: Dictionary[StringName, Array] = {
 	&"move_left": [KEY_A, KEY_LEFT],
 	&"move_right": [KEY_D, KEY_RIGHT],
 	&"jump": [KEY_SPACE, KEY_W, KEY_UP],
+	&"ability": [KEY_J, KEY_E],
 }
 
 

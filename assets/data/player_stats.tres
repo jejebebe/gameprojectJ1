@@ -9,3 +9,4 @@ jump_velocity = -380.0
 gravity = 900.0
 max_fall_speed = 400.0
 jump_cut_factor = 0.4
+stomp_bounce_velocity = -200.0

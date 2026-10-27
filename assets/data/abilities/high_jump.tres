@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="HighJumpAbility" load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://src/abilities/high_jump_ability.gd" id="1_script"]
+[ext_resource type="Texture2D" path="res://assets/art/abilities/high_jump_dust_sheet.png" id="2_dust"]
+
+[resource]
+script = ExtResource("1_script")
+ability_id = &"high_jump"
+cooldown = 0.0
+icon_pattern = PackedStringArray("...#...", "..###..", ".#####.", "...#...", "...#...", "...#...")
+icon_color = Color(0.3, 0.85, 0.35, 1)
+jump_height_multiplier = 1.8
+dust_sheet = ExtResource("2_dust")
+dust_frame_size = Vector2i(16, 16)
+dust_frame_count = 4
+dust_fps = 16.0

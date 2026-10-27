@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="HealthStats" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://src/player/health_stats.gd" id="1_stats"]
+
+[resource]
+script = ExtResource("1_stats")
+max_health = 3
+start_lives = 3
+bonus_heart_amount = 1
+max_bonus_hearts = 2
+hit_protection_time = 1.5
+flash_interval = 0.1
+flash_alpha = 0.3

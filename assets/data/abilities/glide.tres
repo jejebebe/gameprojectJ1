@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="GlideAbility" load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://src/abilities/glide_ability.gd" id="1_script"]
+[ext_resource type="Texture2D" path="res://assets/art/abilities/glide_canopy_sheet.png" id="2_canopy"]
+
+[resource]
+script = ExtResource("1_script")
+ability_id = &"glide"
+cooldown = 0.0
+icon_pattern = PackedStringArray(".#####.", "#######", "#.#.#.#", "...#...", "...#...", "..##...")
+icon_color = Color(0.45, 0.78, 1, 1)
+max_fall_speed = 60.0
+effect_sheet = ExtResource("2_canopy")
+effect_frame_size = Vector2i(16, 16)
+effect_frame_count = 3
+effect_fps = 8.0
+effect_offset = Vector2(0, -22)

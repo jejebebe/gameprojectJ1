@@ -1,12 +1,12 @@
 # Story 003: 적 3종과 밟기·피격 규칙
 
 > **Epic**: jeis-adventure
-> **Status**: Ready
+> **Status**: Complete
 > **Layer**: Core
 > **Type**: Integration
 > **Estimate**: L
 > **Manifest Version**: N/A (minimal — no control manifest)
-> **Last Updated**: set by /dev-story when implementation begins
+> **Last Updated**: 2026-10-26
 
 ## Context
 
@@ -56,14 +56,29 @@
 
 ## Files
 
-*Planned. `/dev-story` replaces this list with the files it changed.*
-
-- src/enemies/enemy_base.gd
-- src/enemies/enemy_a.tscn
-- src/enemies/enemy_b.tscn
-- src/enemies/enemy_c.tscn
-- assets/data/enemies/enemy_stats.tres
-- assets/art/enemies/ (스프라이트 시트)
+- src/enemies/enemy_stats.gd
+- src/enemies/enemy.gd
+- src/enemies/walker.gd
+- src/enemies/jumper.gd
+- src/enemies/flyer.gd
+- src/enemies/walker.tscn
+- src/enemies/jumper.tscn
+- src/enemies/flyer.tscn
+- assets/data/enemies/walker_stats.tres
+- assets/data/enemies/jumper_stats.tres
+- assets/data/enemies/flyer_stats.tres
+- assets/art/enemies/walker_sheet.png
+- assets/art/enemies/jumper_sheet.png
+- assets/art/enemies/flyer_sheet.png
+- src/player/player.gd
+- src/player/player.tscn
+- src/player/player_stats.gd
+- assets/data/player_stats.tres
+- src/player/health_component.gd
+- src/player/health_stats.gd
+- assets/data/health_stats.tres
+- src/levels/spike.tscn
+- src/levels/test_gray_box.tscn
 
 ---
 
@@ -89,3 +104,12 @@
 
 - Depends on: `production/epics/jeis-adventure/story-002-health-fail-checkpoint.md`
 - Unlocks: `production/epics/jeis-adventure/story-004-ability-acquire-use.md`
+
+---
+
+## Completion Notes
+**Completed**: 2026-10-26
+**Criteria**: 6/6 passing, all observed in scripted runs of the build (`production/qa/evidence/story-003-enemies-stomp-hit/behaviour-run.log`, screenshots 01-04); not yet played by the user
+**Deviations**: ADVISORY — added `stomp_tolerance` (6 px, in each enemy .tres) because Area2D overlaps lag one physics frame; not in the story, set it to 0 for the strict rule. ADVISORY — an overlap with a second enemy that starts one frame after a bounce still counts as contact damage (rare). ADVISORY — placeholder enemy sheets are 16x16 and small on screen (real art in story 005). OUT OF SCOPE — changed files not in `## Files` are story 002/008 uncommitted work plus engine-generated `.uid`/`.import` files; commit those with their sources. Side effect handled: the player moved to its own collision layer (layer 3); spike and pit detection re-checked and still work
+**Test Evidence**: waived at qa.level minimal (behaviour log and screenshots 01-04 kept in `production/qa/evidence/story-003-enemies-stomp-hit/`)
+**Reviewed by**: self, no independent review (QL-TEST-COVERAGE, LP-CODE-REVIEW skipped — Solo mode; godot-gdscript-specialist ran an engine-API check during /dev-story, findings were sent back once and fixed)

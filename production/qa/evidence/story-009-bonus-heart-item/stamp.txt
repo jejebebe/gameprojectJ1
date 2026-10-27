@@ -1,0 +1,8 @@
+Reviewed-Content-Hash: src/items/bonus_heart.gd 76b56bd495ca0d23b627cd54c56f88bfa7b977b1
+Reviewed-Content-Hash: src/items/bonus_heart.tscn a89feb2ef7a5bcfcd76d0b0d96e3a142b5102988
+Reviewed-Content-Hash: src/player/health_stats.gd 6553fcfeed463c4958d9ca0675c33bfd3f6a6b22
+Reviewed-Content-Hash: assets/data/health_stats.tres 3f93a9c0f399f886fdf538f1466b19514514e320
+Reviewed-Content-Hash: src/player/health_component.gd 78504a223533b2cda0bd6c5a2a60d2c42c6bf223
+Reviewed-Content-Hash: src/systems/respawn_manager.gd fd4b32af0a017ca31f448fe904855670d431e97e
+Reviewed-Content-Hash: src/ui/health_hud.gd 4c90cacdd186cfc81ec3c032d743c15831d338a7
+Reviewed-Content-Hash: src/levels/test_gray_box.tscn a74d7ffc4c528f7c9f069b91c372ce26758abd15

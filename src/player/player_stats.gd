@@ -15,3 +15,5 @@ extends Resource
 @export var max_fall_speed: float = 400.0
 ## Upward speed is multiplied by this when jump is released early (0 to 1).
 @export_range(0.0, 1.0) var jump_cut_factor: float = 0.4
+## Upward speed (negative is up) after stomping an enemy, in pixels per second.
+@export var stomp_bounce_velocity: float = -200.0

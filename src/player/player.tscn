@@ -1,12 +1,17 @@
-[gd_scene load_steps=4 format=3]
+[gd_scene load_steps=7 format=3]
 
 [ext_resource type="Script" path="res://src/player/player.gd" id="1_player"]
 [ext_resource type="Resource" path="res://assets/data/player_stats.tres" id="2_stats"]
+[ext_resource type="Script" path="res://src/player/health_component.gd" id="3_health"]
+[ext_resource type="Resource" path="res://assets/data/health_stats.tres" id="4_healthstats"]
+[ext_resource type="Script" path="res://src/player/ability_holder.gd" id="5_holder"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_body"]
 size = Vector2(16, 24)
 
 [node name="Player" type="CharacterBody2D"]
+collision_layer = 4
+collision_mask = 1
 script = ExtResource("1_player")
 stats = ExtResource("2_stats")
 
@@ -20,3 +25,11 @@ offset_right = 8.0
 offset_bottom = 12.0
 color = Color(0.95, 0.55, 0.15, 1)
 mouse_filter = 2
+
+[node name="Health" type="Node" parent="."]
+script = ExtResource("3_health")
+stats = ExtResource("4_healthstats")
+
+[node name="AbilityHolder" type="Node" parent="." node_paths=PackedStringArray("player")]
+script = ExtResource("5_holder")
+player = NodePath("..")

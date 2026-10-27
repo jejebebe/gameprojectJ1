@@ -1,0 +1,12 @@
+Reviewed-Content-Hash: src/systems/respawn_manager.gd 7d364d405249c5a902ec0cb9218a3a91226f520a
+Reviewed-Content-Hash: src/player/health_stats.gd 9ad263d4d75ccc1a85534ea180fd01839a59edf7
+Reviewed-Content-Hash: assets/data/health_stats.tres a31fa72e4d553808a0a8ee67e5005e87f1948637
+Reviewed-Content-Hash: src/player/health_component.gd 9da670cf4052b703140e32c26b3f80d36899a353
+Reviewed-Content-Hash: src/levels/checkpoint.gd e85460bc32c5b4dcfda92de3e13b90e90d161f0e
+Reviewed-Content-Hash: src/levels/checkpoint.tscn 94e0f0c770aed21b5d1e3e237d6594ab2fabda70
+Reviewed-Content-Hash: src/levels/kill_zone.gd bd20322507e06379b2419a153570a0191040bf17
+Reviewed-Content-Hash: src/levels/spike.gd a24a52e8e98503b3eabdfbd7da01cd2cf4e60aa5
+Reviewed-Content-Hash: src/levels/spike.tscn 3cb2c0db9fc965249bb17bc6cfb61f2beb9e9d71
+Reviewed-Content-Hash: src/player/player.gd a6ce1b3001eb293224d03709e371dfead97fe3a9
+Reviewed-Content-Hash: src/player/player.tscn 22915006a02da5e0867c58c45eba052db6d90523
+Reviewed-Content-Hash: src/levels/test_gray_box.tscn f4c59c3b555835639db2ec83206c11e91460815e

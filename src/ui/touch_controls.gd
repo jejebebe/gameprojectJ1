@@ -1,11 +1,11 @@
 class_name TouchControls
 extends Control
-## Bottom-half control panel: left, right, jump, plus ability and menu slots
-## (the last two are visible but do nothing yet).
+## Bottom-half control panel: left, right, jump and ability buttons, plus a
+## menu slot (visible but does nothing yet).
 ##
 ## Every pointer (each touch finger, plus the mouse) is tracked on its own, so
 ## one finger can hold "move" while another presses "jump". Pressed buttons
-## drive the input actions `move_left`, `move_right` and `jump`. The panel only
+## drive the input actions `move_left`, `move_right`, `jump` and `ability`. The panel only
 ## presses or releases an action when its own pointer state for that action
 ## changes, so keyboard input on the same action is not cancelled by unrelated
 ## touches or clicks.
@@ -23,6 +23,7 @@ const MOUSE_POINTER: int = -1
 @onready var _left: Panel = $BottomCluster/LeftButton
 @onready var _right: Panel = $BottomCluster/RightButton
 @onready var _jump: Panel = $BottomCluster/JumpButton
+@onready var _ability: Panel = $BottomCluster/AbilityButton
 
 ## Button panel -> input action it drives.
 var _actions: Dictionary[Panel, StringName] = {}
@@ -41,6 +42,7 @@ func _ready() -> void:
 		_left: &"move_left",
 		_right: &"move_right",
 		_jump: &"jump",
+		_ability: &"ability",
 	}
 
 

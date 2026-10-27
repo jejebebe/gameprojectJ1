@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3]
+[gd_scene load_steps=5 format=3]
 
 [ext_resource type="Script" path="res://src/layout/split_layout.gd" id="1_layout"]
 [ext_resource type="PackedScene" path="res://src/levels/test_gray_box.tscn" id="2_level"]
 [ext_resource type="PackedScene" path="res://src/ui/touch_controls.tscn" id="3_controls"]
+[ext_resource type="PackedScene" path="res://src/ui/health_hud.tscn" id="4_hud"]
 
 [node name="SplitLayout" type="Control"]
 layout_mode = 3
@@ -51,6 +52,13 @@ size = Vector2i(360, 320)
 render_target_update_mode = 4
 
 [node name="Level" parent="Column/GameViewContainer/GameView" instance=ExtResource("2_level")]
+
+[node name="HudLayer" type="CanvasLayer" parent="Column/GameViewContainer/GameView"]
+
+[node name="HealthHud" parent="Column/GameViewContainer/GameView/HudLayer" node_paths=PackedStringArray("health", "respawn_manager", "ability_holder") instance=ExtResource("4_hud")]
+health = NodePath("../../Level/Player/Health")
+respawn_manager = NodePath("../../Level/RespawnManager")
+ability_holder = NodePath("../../Level/Player/AbilityHolder")
 
 [node name="TouchControls" parent="Column" instance=ExtResource("3_controls")]
 layout_mode = 1
