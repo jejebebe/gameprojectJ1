@@ -82,14 +82,15 @@
 
 | 스트립 | 프레임 | 스트립 크기 | 경로 |
 |---|---|---|---|
-| idle | 2 | 72x48 | `assets/art/player/jei/default/idle.png` |
-| run | 4 | 144x48 | `assets/art/player/jei/default/run.png` |
-| jump | 1 | 36x48 | `assets/art/player/jei/default/jump.png` |
-| fall | 1 | 36x48 | `assets/art/player/jei/default/fall.png` |
-| ability | 2 | 72x48 | `assets/art/player/jei/default/ability.png` |
-| hurt | 1 | 36x48 | `assets/art/player/jei/default/hurt.png` |
+| idle | 6 | 240x52 | `assets/art/player/jei/default/idle.png` |
+| run | 12 | 480x52 | `assets/art/player/jei/default/run.png` |
+| jump | 3 | 120x52 | `assets/art/player/jei/default/jump.png` |
+| fall | 3 | 120x52 | `assets/art/player/jei/default/fall.png` |
+| ability | 6 | 240x52 | `assets/art/player/jei/default/ability.png` |
+| hurt | 3 | 120x52 | `assets/art/player/jei/default/hurt.png` |
 
-공통: 프레임 36x48, 가로 1줄, 여백 0, PNG RGBA, 알파 0/255만, 오른쪽을 봄 (왼쪽은 `flip_h`). 원본 `assets/art_src/player/jei/default/[동작].aseprite`.
+공통: 프레임 40x52 (최종 기준 그림과 같은 칸), 가로 1줄, 여백 0, PNG RGBA, 알파 0/255만, 오른쪽을 봄 (왼쪽은 `flip_h`). 원본 `assets/art_src/player/jei/default/[동작].aseprite`.
+프레임 수 (사용자 결정 2026-10-28): 부드럽게 보이도록 처음 계획의 3배. 주요 포즈 사이에 중간 프레임 2장씩. 재생 속도(fps)도 3배로 해서 동작 시간은 유지한다. jump·fall 3프레임은 망토·머리카락이 흔들리는 짧은 반복.
 
 **동작:** 모든 프레임에서 바닥선과 몸 중심이 같다. idle은 숨쉬기 1px + 양갈래·망토 끝 흔들림. run은 다리 2포즈를 4프레임으로, 양갈래와 망토가 뒤로 날린다. jump는 팔을 들고 망토가 위로 접힘, fall은 팔을 벌리고 양갈래·망토가 위로 뜸. ability는 프레임 1 팔을 당김, 프레임 2 팔을 뻗음, 두 프레임 모두 입 벌림. hurt는 몸이 뒤로 젖혀지고 눈 `> <`, 망토가 앞으로 펄럭.
 

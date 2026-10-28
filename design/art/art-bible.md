@@ -179,7 +179,7 @@ holding its placeholder is incomplete; a later run fills only those.
 
 | 대상 | 동작별 프레임 수 |
 |---|---|
-| 제이 | idle 2, run 4 (여유 있으면 6), jump 1, fall 1, ability 2, hurt 1 (`> <`, 사용자 결정 2026-10-28). 흰색 깜빡임은 셰이더 |
+| 제이 | idle 6, run 12, jump 3, fall 3, ability 6, hurt 3 (사용자 결정 2026-10-28: 부드럽게 3배, fps도 3배). 흰색 깜빡임은 셰이더 |
 | 적 | walk/move 2~4, defeated 3 (납작 → 연기) |
 | 보스 | idle 2, shake 2, crouch 2, puff 3, roll 4, jump 2, dazed 2 (+별 이펙트), hurt 1, dust 4 (별도 24x24) |
 | 아이템·깃발 | idle 2~4 |
