@@ -1,0 +1,36 @@
+GIMP Palette
+Name: jei_character
+Columns: 8
+# Character palette taken from Jei's final reference (2026-10-28), most used first. Characters, enemies and the boss use these colours (art-bible §4).
+  1   1   1	010101 char_00
+195  49  50	C33132 char_01
+150  24  36	961824 char_02
+ 39  39  41	272729 char_03
+ 60  40  39	3C2827 char_04
+ 92  18  31	5C121F char_05
+ 14  13  19	0E0D13 char_06
+253 227 210	FDE3D2 char_07
+ 30  19  25	1E1319 char_08
+254 254 254	FEFEFE char_09
+224 159 142	E09F8E char_10
+105 105 107	69696B char_11
+254 182 167	FEB6A7 char_12
+224 148 135	E09487 char_13
+189 184 191	BDB8BF char_14
+251 222 201	FBDEC9 char_15
+ 78  60  57	4E3C39 char_16
+ 79  24  30	4F181E char_17
+180 100  92	B4645C char_18
+ 67  20  28	43141C char_19
+205 195 203	CDC3CB char_20
+170  55  60	AA373C char_21
+234 168 148	EAA894 char_22
+186 171 172	BAABAC char_23
+141 118 104	8D7668 char_24
+230 118 116	E67674 char_25
+185 178 185	B9B2B9 char_26
+235 187 167	EBBBA7 char_27
+252 195 175	FCC3AF char_28
+161  51  57	A13339 char_29
+254 173 158	FEAD9E char_30
+158  29  39	9E1D27 char_31

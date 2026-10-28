@@ -1,0 +1,58 @@
+GIMP Palette
+Name: jei_master
+Columns: 4
+# 제이의 모험 master palette — 30 colours (design/art/art-bible.md §4). No pure black.
+255 255 255	FFFFFF sky_white
+239 255 255	EFFFFF sky_mist
+191 239 255	BFEFFF sky
+128 223 255	80DFFF sky_deep_water
+ 58 159 196	3A9FC4 sea_blue_collar
+175 223 223	AFDFDF teal_pale
+ 80 175 159	50AF9F harbour_teal
+ 64 143 159	408F9F harbour_teal_dark
+ 31  94 102	1F5E66 teal_deep_skirt
+246 238 228	F6EEE4 cream
+227 221 210	E3DDD2 stone
+189 180 168	BDB4A8 stone_dark
+201 138  90	C98A5A wood
+138  90  60	8A5A3C wood_dark
+ 90  58  44	5A3A2C wood_soot
+255 241 184	FFF1B8 fire_core
+240 160  64	F0A040 amber
+240 122  42	F07A2A warn_orange
+210  55  63	D2373F danger_red
+175  48  80	AF3050 danger_red_dark
+242 210 122	F2D27A gold_light
+232 181  74	E8B54A gold
+239 223 223	EFDFDF sunset_cloud
+223 159 143	DF9F8F peach_blush
+223  96 143	DF608F sunset_pink
+232 154 192	E89AC0 glide_pink
+144  96 168	9060A8 enemy_purple
+110  74 106	6E4A6A dusk_purple
+ 64  64  80	404050 navy_soft
+ 48  32  48	302030 navy_ink
+# character ramps (Jei v3, 3-tone light/mid/dark; mid tones reuse the colours above)
+255 235 210	FFEBD2 skin_hi
+247 205 165	F7CDA5 skin_mid
+217 144 110	D9906E skin_lo
+148 144 176	9490B0 hair_gloss
+ 88  80 112	585070 hair_hi
+ 28  20  34	1C1422 hair_lo
+255 111  94	FF6F5E cape_red_hi
+140  31  58	8C1F3A cape_red_lo
+ 56 166 160	38A6A0 dress_hi
+ 35 122 128	237A80 dress_mid
+ 26  79  92	1A4F5C dress_lo
+192  70  30	C0461E cape_orange_lo
+ 98 196 238	62C4EE cape_blue_hi
+ 36  94 148	245E94 cape_blue_lo
+255 204 228	FFCCE4 cape_pink_hi
+192  80 138	C0508A cape_pink_lo
+# Jei v4 additions (cushion-shading intermediates, 2026-10-28)
+ 60  52  86	3C3456 hair_mid
+122 128 192	7A80C0 hair_sheen
+233 172 132	E9AC84 skin_shade
+240  80  63	F0503F cape_red_mid
+108 205 181	6CCDB5 dress_pale
+245 155 134	F59B86 blush_warm

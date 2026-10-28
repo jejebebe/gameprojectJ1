@@ -41,6 +41,10 @@ engine:
   physics: "Godot Physics 2D"
   path: "C:/Users/dlsjq/OneDrive/Desktop/Claude/Godot_v4.7.2-stable_win64/Godot_v4.7.2-stable_win64_console.exe"
 
+# Art tools driven by agents (art-bible §8: agents draw with Aseprite Lua scripts in batch mode).
+tools:
+  aseprite: "D:/SteamLibrary/steamapps/common/Aseprite/Aseprite.exe"
+
 specialists:
   code: "godot-gdscript-specialist"
   shader: "godot-shader-specialist"
