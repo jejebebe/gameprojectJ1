@@ -144,9 +144,9 @@ func _on_protection_changed(active: bool) -> void:
 
 ## Picks this frame's animation: a running one-shot (hurt, ability) is left to
 ## finish; otherwise jump/fall in the air, run/idle on the ground. Also faces the
-## sprite (the art faces right).
+## sprite toward `facing` (the art's own direction comes from `art.art_faces_left`).
 func _update_animation() -> void:
-	_sprite.flip_h = facing < 0.0
+	_sprite.flip_h = (facing > 0.0) if art.art_faces_left else (facing < 0.0)
 	if _one_shot != &"":
 		return
 	var next: StringName

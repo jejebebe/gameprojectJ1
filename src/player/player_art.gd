@@ -12,6 +12,9 @@ const DEFAULT_SET: StringName = &"default"
 
 ## Size of one frame in pixels (every strip of every set).
 @export var frame_size: Vector2i = Vector2i(48, 52)
+## True when the strips are drawn facing left (Jei's art is). The player flips
+## the sprite so it always faces the way it moves.
+@export var art_faces_left: bool = true
 ## Timing of each animation. Required names: idle, run, jump, fall, ability, hurt.
 @export var animations: Array[PlayerAnimSpec] = []
 ## Strip folder per set id. Ability sets use the ability's `ability_id` as key;
