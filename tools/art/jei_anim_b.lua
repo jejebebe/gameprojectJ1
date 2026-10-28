@@ -1,4 +1,4 @@
--- jei_anim_b.lua — Jei run (12) and ability (6) strips for the default cape set.
+-- jei_anim_b.lua — Jei run (12) and ability (6) strips for the default and ability cape sets.
 -- Usage (Aseprite batch):
 --   Aseprite.exe -b --script-param root=<repo root> --script tools/art/jei_anim_b.lua
 -- Reads  assets/art/player/jei/default/reference.png (never written).
@@ -24,23 +24,57 @@ local KEY = {
   k = "FDE3D2", l = "FBDEC9", i = "E09487", z = "B4645C",
   E = "3C2827", D = "1E1319", u = "AA373C", x = "E67674", v = "A13339",
   s = "FCC3AF", n = "EAA894",
+  m = "5C121F",                -- open-mouth shade: never recoloured by a cape set
+  Y = "FFF3A0", L = "FFB347",  -- flame_core, flame_mid (fireball set)
 }
 local pc = app.pixelColor
 local CLEAR = pc.rgba(0, 0, 0, 0)
-local PX = {}
-for ch, h in pairs(KEY) do
-  PX[ch] = pc.rgba(tonumber(h:sub(1,2),16), tonumber(h:sub(3,4),16), tonumber(h:sub(5,6),16), 255)
+local function hexpx(h)
+  return pc.rgba(tonumber(h:sub(1,2),16), tonumber(h:sub(3,4),16), tonumber(h:sub(5,6),16), 255)
 end
+local PX = {}
+for ch, h in pairs(KEY) do PX[ch] = hexpx(h) end
 
-local srcSpr = app.open(SRC)
-if srcSpr.colorMode ~= ColorMode.RGB then app.command.ChangePixelFormat{ format = "rgb" } end
-local ref = Image(srcSpr.spec); ref:clear(); ref:drawSprite(srcSpr, 1)
-srcSpr:close()
+-- Cape sets. Colours = jei_capes.lua SETS (c main, b mid, g lining); the rest of the
+-- cape (and the right cape, hood flame, stars) comes from the set's approved reference.
+local SETCOL = {
+  default   = { c = "C33132", b = "961824", g = "5C121F" },
+  fireball  = { c = "EC7C2A", b = "B44A1C", g = "7A2C14" },
+  high_jump = { c = "3A9CDC", b = "2668AE", g = "17407A" },
+  glide     = { c = "EE6FA6", b = "C24C86", g = "82285A" },
+}
+-- Shape options for the redrawn left cape (all off for default).
+local SHAPE = {
+  default   = {},
+  fireball  = { flames = true, hoodSway = true },
+  high_jump = { cut = 5 },                  -- hem 5 rows higher = waist length
+  glide     = { widen = 2, petal = true },
+}
+-- Cast sparkle key remap per set (accent colours).
+local SPARK_KEY = {
+  fireball  = { o = "Y", x = "L", u = "c", s = "Y" },
+  high_jump = { x = "c", u = "b", s = "o" },
+  glide     = { x = "c", u = "b", s = "o" },
+}
+
+local function loadRef(path)
+  local spr = app.open(path)
+  if spr.colorMode ~= ColorMode.RGB then app.command.ChangePixelFormat{ format = "rgb" } end
+  local img = Image(spr.spec); img:clear(); img:drawSprite(spr, 1)
+  spr:close()
+  return img
+end
+local ref = loadRef(SRC)
 
 local OX = 4                                   -- reference x offset inside the frame
 local W, H = ref.width + 2 * OX, ref.height    -- 48 x 52
-local base = Image(W, H, ColorMode.RGB); base:clear()
-base:drawImage(ref, Point(OX, 0))
+local function framed(r)
+  local b = Image(W, H, ColorMode.RGB); b:clear(); b:drawImage(r, Point(OX, 0)); return b
+end
+local defBase = framed(ref)
+local base = defBase
+local SET, SH = "default", SHAPE.default
+local hoodFlame = {}                           -- fireball hood-tip pixels {x, y, px}
 local XMIN, XMAX = -OX, W - OX - 1             -- reference-coordinate x range
 
 local function rnd(v) return math.floor(v + 0.5) end
@@ -117,11 +151,16 @@ local ARM_CAST = {            -- short punch forward
   "aaaaaa.",
 }
 -- Open mouth for the cast (reference coordinates).
-local MOUTH_OPEN = { {27, 14, "vgv"}, {28, 14, "gxg"}, {29, 14, "vuv"} }
+local MOUTH_OPEN = { {27, 14, "vmv"}, {28, 14, "mxm"}, {29, 14, "vuv"} }
 
 --- Reference minus right arm (filled with cape lining), left arm, left cape and legs.
-local function makeBody(mouth)
+-- hsw: fireball hood-flame tip sway (0 or 1 px back).
+local function makeBody(mouth, hsw)
   local img = base:clone()
+  if SH.hoodSway and hsw and hsw ~= 0 then
+    for _, q in ipairs(hoodFlame) do setRaw(img, q[1], q[2], CLEAR) end
+    for _, q in ipairs(hoodFlame) do setRaw(img, q[1] + hsw, q[2], q[3]) end
+  end
   stamp(img, RARM, 0, 0, "g")
   local marks = {}
   for y = 36, 44 do for x = 20, 31 do
@@ -204,11 +243,14 @@ end
 --    amp (edge ripple px), fold (hem scallop px), phase.
 local function drawCape(img, p)
   local top, hb, ph = p.top, p.hem, p.phase
+  local lift = p.lift
+  if p.cut then hb = hb - p.cut; lift = rnd(lift * 0.6) end
   local L, Lmin = {}, 99
   for y = top, hb + 2 do
     local t = math.min(1, (y - top) / (hb - top))
     local v = 7 + p.tdx - rnd(4 * t) - rnd(p.stream * t ^ (p.curve or 1.3))
               + rnd(p.amp * t ^ 0.8 * math.sin((y - top) * 0.7 - ph))
+    if p.widen then v = v - rnd(p.widen * math.min(1, t * 2)) end
     if v < XMIN then v = XMIN end
     L[y] = v; if v < Lmin then Lmin = v end
   end
@@ -217,7 +259,8 @@ local function drawCape(img, p)
   local function hemAt(x)
     local u = (xA - x) / math.max(1, xA - Lmin)
     if u < 0 then u = 0 elseif u > 1 then u = 1 end
-    local h = hb - rnd(p.lift * u) + rnd(p.fold * fs(x, hb))
+    local h = hb - rnd(lift * u) + rnd(p.fold * fs(x, hb))
+    if p.petal and x % 3 ~= 0 then h = h + 1 end   -- 2-px petals, 1-px notches
     if x > xA - 3 and h > hb then h = hb end
     return h
   end
@@ -230,11 +273,40 @@ local function drawCape(img, p)
       x = x + 1
     end
   end
+  local yEnd = hb + 2
+  -- Fireball: two rounded flame tongues (tip up) on the outer edge (mid) and the hem
+  -- corner, added to the mask so the outline closes around them; tip sways p.sway px.
+  local core = {}
+  if p.flames then
+    local sw = p.sway or 0
+    local yc = top + rnd((hb - top) * 0.45)
+    local xh = math.max(XMIN + 2, L[hb] + 1)
+    local blobs = { { math.max(XMIN + 2, L[yc]), yc }, { xh, hemAt(xh) - 1 } }
+    local SPAN = { [-3] = {sw-1, sw}, [-2] = {sw-2, sw+1}, [-1] = {-2, 2},
+                   [0] = {-2, 2}, [1] = {-2, 2}, [2] = {-1, 1} }
+    for _, bl in ipairs(blobs) do
+      local cx, cy = bl[1], bl[2]
+      for dy = -3, 2 do
+        local y = cy + dy
+        if y >= top and y <= H - 1 then
+          for yy = yEnd + 1, y do mask[yy] = {} end
+          if y > yEnd then yEnd = y end
+          for x = cx + SPAN[dy][1], cx + SPAN[dy][2] do
+            if x >= XMIN and not opaque(img, x, y) then mask[y][x] = true end
+          end
+        end
+      end
+      for _, q in ipairs({ {0,-1,"Y"}, {-1,-1,"L"}, {1,-1,"L"}, {0,0,"Y"}, {-1,0,"L"},
+                           {1,0,"L"}, {0,1,"L"} }) do
+        core[#core+1] = { cx + q[1], cy + q[2], q[3] }
+      end
+    end
+  end
   local function inM(x, y) return mask[y] ~= nil and mask[y][x] == true end
   -- Strand cleanup: drop cape pixels with < 2 supported 4-neighbours (no 1-px threads).
   for _ = 1, 3 do
     local drop = {}
-    for y = top, hb + 2 do for x, _ in pairs(mask[y]) do
+    for y = top, yEnd do for x, _ in pairs(mask[y]) do
       local nb = 0
       for _, d in ipairs(N4) do
         if inM(x + d[1], y + d[2]) or opaque(img, x + d[1], y + d[2]) then nb = nb + 1 end
@@ -252,7 +324,7 @@ local function drawCape(img, p)
   end
   local N8 = { {1,0}, {-1,0}, {0,1}, {0,-1}, {1,1}, {1,-1}, {-1,1}, {-1,-1} }
   local paint = {}
-  for y = top, hb + 2 do for x, _ in pairs(mask[y]) do
+  for y = top, yEnd do for x, _ in pairs(mask[y]) do
     local edge = isEdge(x, y)
     local ch
     if edge then
@@ -276,6 +348,9 @@ local function drawCape(img, p)
     if ch then paint[#paint+1] = {x, y, ch} end
   end end
   for _, q in ipairs(paint) do put(img, q[1], q[2], q[3]) end
+  for _, q in ipairs(core) do
+    if inM(q[1], q[2]) and not isEdge(q[1], q[2]) then put(img, q[1], q[2], q[3]) end
+  end
 end
 
 --- One leg: hip column hx at row hr, ankle offset d, sole row fy.
@@ -342,15 +417,17 @@ local RUN_LEGS = {
 local function runFrame(f)            -- f = 0..11
   local half, k = (f >= 6), f % 6
   local by, sq = RUN_BY[k + 1], (k == 0) and 1 or 0
-  local img = makeBody(false)
+  local ph = f * math.pi / 3          -- two wave cycles per loop, ~1.4 px travel/frame
+  local img = makeBody(false, (math.sin(ph) > 0) and 1 or 0)
   img = lean(img, 1, 1, 0)            -- head leans 1 px; torso/feet centre fixed
   if sq == 1 then img = squash(img, 44) end
   img = bob(img, by)
-  local ph = f * math.pi / 3          -- two wave cycles per loop, ~1.4 px travel/frame
   wobbleRight(img, 36 + by, 50 + by, ph, 2, 0)
   drawCape(img, { top = 36 + by + sq, hem = 48 + by, tdx = 0,
                   stream = 5 + rnd(math.sin(ph)), lift = 2 + rnd(1.5 * math.sin(ph + 1)), curve = 0.8,
-                  amp = 2.5, fold = 1.6, phase = ph })
+                  amp = 2.5, fold = 1.6, phase = ph,
+                  cut = SH.cut, widen = SH.widen, petal = SH.petal, flames = SH.flames,
+                  sway = (math.sin(ph) > 0) and -1 or 0 })
   local lg = RUN_LEGS[k + 1]
   local hr = 47 + by
   if not half then drawLegs(img, 0, hr, lg[3], lg[4], lg[1], lg[2])
@@ -384,18 +461,40 @@ local SPARK = {
 
 local function abilityFrame(f)        -- f = 1..6
   local a = AB[f]
-  local img = makeBody(a.mouth)
-  img = lean(img, a.head, a.head, 0)
   local ph = f * 1.3
+  local img = makeBody(a.mouth, (math.sin(ph) > 0) and 1 or 0)
+  img = lean(img, a.head, a.head, 0)
   wobbleRight(img, 36, 50, ph, a.ra, a.rb)
   drawCape(img, { top = 36, hem = 48, tdx = 0, stream = a.stream, lift = a.lift,
-                  amp = a.amp, fold = a.fold, phase = ph })
+                  amp = a.amp, fold = a.fold, phase = ph,
+                  cut = SH.cut, widen = SH.widen, petal = SH.petal, flames = SH.flames,
+                  sway = (math.sin(ph) > 0) and -1 or 0 })
   drawLegs(img, 0, 47, a.dL, 51, a.dR, 51)
   leftArm(img, a.larm, 0)
   rightArm(img, a.arm, 0)
   closeOutline(img)
-  if a.spark > 0 then for _, q in ipairs(SPARK[a.spark]) do put(img, q[1], q[2], q[3]) end end
+  if a.spark > 0 then
+    local km = SPARK_KEY[SET] or {}
+    for _, q in ipairs(SPARK[a.spark]) do put(img, q[1], q[2], km[q[3]] or q[3]) end
+  end
   return img
+end
+
+--- Switches every set-dependent global (colours, base body, hood-flame pixels).
+local function useSet(name)
+  assert(SETCOL[name], "unknown set " .. tostring(name))
+  SET, SH = name, SHAPE[name]
+  for k, h in pairs(SETCOL[name]) do PX[k] = hexpx(h) end
+  if name == "default" then base = defBase
+  else base = framed(loadRef(root .. "/assets/art/player/jei/" .. name .. "/reference.png")) end
+  hoodFlame = {}
+  if SH.hoodSway then           -- hood-tip rows added by the set (absent in default)
+    for y = 4, 5 do for x = XMIN, XMAX do
+      if not opaque(defBase, x, y) and opaque(base, x, y) then
+        hoodFlame[#hoodFlame+1] = { x, y, get(base, x, y) }
+      end
+    end end
+  end
 end
 
 -- ---------------------------------------------------------------- output
@@ -405,39 +504,36 @@ local function savePng(img, path)
   s:saveAs(path); s:close()
 end
 
-local function writeAnim(name, imgs, durations)
+local function writeAnim(set, name, imgs, durations)
   local strip = Image(W * #imgs, H, ColorMode.RGB); strip:clear()
   for n, img in ipairs(imgs) do strip:drawImage(img, Point((n-1) * W, 0)) end
-  savePng(strip, root .. "/assets/art/player/jei/default/" .. name .. ".png")
+  savePng(strip, root .. "/assets/art/player/jei/" .. set .. "/" .. name .. ".png")
   local s = Sprite(W, H, ColorMode.RGB)
   for _ = 2, #imgs do s:newEmptyFrame() end
   for n, img in ipairs(imgs) do
     s:newCel(s.layers[1], n, img, Point(0, 0))
     s.frames[n].duration = durations[n]
   end
-  s:saveAs(root .. "/assets/art_src/player/jei/default/" .. name .. ".aseprite"); s:close()
+  s:saveAs(root .. "/assets/art_src/player/jei/" .. set .. "/" .. name .. ".aseprite"); s:close()
 end
 
-local run, ability = {}, {}
-for f = 0, 11 do run[f + 1] = runFrame(f) end
-for f = 1, 6 do ability[f] = abilityFrame(f) end
-local rd = {}; for n = 1, 12 do rd[n] = 0.05 end
-writeAnim("run", run, rd)                                        -- 0.60 s loop
-writeAnim("ability", ability, {0.07, 0.07, 0.05, 0.08, 0.08, 0.05}) -- 0.40 s one-shot
-
--- Review sheets: row 1 = run 1-12, row 2 = ability 1-6; 52x60 cells on sky, teal ground.
+-- Review sheet: rows of frames, 52x60 cells on sky with a teal ground strip.
 local CW, CH = 52, 60
 local function hex(h) return pc.rgba(tonumber(h:sub(1,2),16), tonumber(h:sub(3,4),16), tonumber(h:sub(5,6),16), 255) end
-local sheet = Image(CW * 12, CH * 2, ColorMode.RGB)
-for y = 0, sheet.height - 1 do for x = 0, sheet.width - 1 do
-  local cy = y % CH
-  local c = hex("BFEFFF")
-  if cy >= 56 then c = (cy >= 58) and hex("408F9F") or hex("50AF9F") end
-  sheet:drawPixel(x, y, c)
-end end
-for n, img in ipairs(run) do sheet:drawImage(img, Point((n-1) * CW + 2, 4)) end
-for n, img in ipairs(ability) do sheet:drawImage(img, Point((n-1) * CW + 2, CH + 4)) end
-local function scaled(k)
+local function reviewSheet(rows, cols)
+  local sheet = Image(CW * cols, CH * #rows, ColorMode.RGB)
+  for y = 0, sheet.height - 1 do for x = 0, sheet.width - 1 do
+    local cy = y % CH
+    local c = hex("BFEFFF")
+    if cy >= 56 then c = (cy >= 58) and hex("408F9F") or hex("50AF9F") end
+    sheet:drawPixel(x, y, c)
+  end end
+  for r, imgs in ipairs(rows) do
+    for n, img in ipairs(imgs) do sheet:drawImage(img, Point((n-1) * CW + 2, (r-1) * CH + 4)) end
+  end
+  return sheet
+end
+local function scaled(sheet, k)
   local big = Image(sheet.width * k, sheet.height * k, ColorMode.RGB)
   for y = 0, sheet.height - 1 do for x = 0, sheet.width - 1 do
     local p = sheet:getPixel(x, y)
@@ -445,6 +541,39 @@ local function scaled(k)
   end end
   return big
 end
-savePng(scaled(6), root .. "/assets/art_src/player/jei/anim_b_x6.png")
-savePng(scaled(3), root .. "/assets/art_src/player/jei/anim_b_x3.png")
+
+-- --script-param set=default (default) | fireball | high_jump | glide | sets (the 3) | all
+local want = app.params["set"]
+if want == nil or want == "" then want = "default" end
+local list = { want }
+if want == "all" then list = { "default", "fireball", "high_jump", "glide" }
+elseif want == "sets" then list = { "fireball", "high_jump", "glide" } end
+
+local made = {}
+for _, set in ipairs(list) do
+  useSet(set)
+  local run, ability = {}, {}
+  for f = 0, 11 do run[f + 1] = runFrame(f) end
+  for f = 1, 6 do ability[f] = abilityFrame(f) end
+  local rd = {}; for n = 1, 12 do rd[n] = 0.05 end
+  writeAnim(set, "run", run, rd)                                        -- 0.60 s loop
+  writeAnim(set, "ability", ability, {0.07, 0.07, 0.05, 0.08, 0.08, 0.05}) -- 0.40 s one-shot
+  made[set] = { run = run, ability = ability }
+  if set == "default" then         -- row 1 = run 1-12, row 2 = ability 1-6
+    local sheet = reviewSheet({ run, ability }, 12)
+    savePng(scaled(sheet, 6), root .. "/assets/art_src/player/jei/anim_b_x6.png")
+    savePng(scaled(sheet, 3), root .. "/assets/art_src/player/jei/anim_b_x3.png")
+  end
+end
+-- Sets review: rows = fireball, high_jump, glide; columns = run 1-12 then ability 1-6.
+if made.fireball and made.high_jump and made.glide then
+  local rows = {}
+  for _, set in ipairs({ "fireball", "high_jump", "glide" }) do
+    local r = {}
+    for _, img in ipairs(made[set].run) do r[#r+1] = img end
+    for _, img in ipairs(made[set].ability) do r[#r+1] = img end
+    rows[#rows+1] = r
+  end
+  savePng(scaled(reviewSheet(rows, 18), 3), root .. "/assets/art_src/player/jei/sets_b_x3.png")
+end
 print("done")
