@@ -1,0 +1,58 @@
+[gd_resource type="Resource" script_class="PlayerArt" load_steps=9 format=3]
+
+[ext_resource type="Script" path="res://src/player/player_art.gd" id="1_art"]
+[ext_resource type="Script" path="res://src/player/player_anim_spec.gd" id="2_spec"]
+
+[sub_resource type="Resource" id="Resource_idle"]
+script = ExtResource("2_spec")
+animation = &"idle"
+frame_count = 6
+fps = 5.0
+loop = true
+
+[sub_resource type="Resource" id="Resource_run"]
+script = ExtResource("2_spec")
+animation = &"run"
+frame_count = 12
+fps = 20.0
+loop = true
+
+[sub_resource type="Resource" id="Resource_jump"]
+script = ExtResource("2_spec")
+animation = &"jump"
+frame_count = 3
+fps = 10.0
+loop = true
+
+[sub_resource type="Resource" id="Resource_fall"]
+script = ExtResource("2_spec")
+animation = &"fall"
+frame_count = 3
+fps = 10.0
+loop = true
+
+[sub_resource type="Resource" id="Resource_ability"]
+script = ExtResource("2_spec")
+animation = &"ability"
+frame_count = 6
+fps = 14.0
+loop = false
+
+[sub_resource type="Resource" id="Resource_hurt"]
+script = ExtResource("2_spec")
+animation = &"hurt"
+frame_count = 3
+fps = 10.0
+loop = false
+
+[resource]
+script = ExtResource("1_art")
+frame_size = Vector2i(48, 52)
+animations = Array[ExtResource("2_spec")]([SubResource("Resource_idle"), SubResource("Resource_run"), SubResource("Resource_jump"), SubResource("Resource_fall"), SubResource("Resource_ability"), SubResource("Resource_hurt")])
+set_folders = Dictionary[StringName, String]({
+&"default": "res://assets/art/player/jei/default",
+&"fireball": "res://assets/art/player/jei/fireball",
+&"glide": "res://assets/art/player/jei/glide",
+&"high_jump": "res://assets/art/player/jei/high_jump"
+})
+run_speed_threshold = 1.0

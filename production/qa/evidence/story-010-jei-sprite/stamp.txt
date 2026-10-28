@@ -1,0 +1,5 @@
+Reviewed-Content-Hash: src/player/player.gd 81f72b8d621b008e57b902820486e860e349b87e
+Reviewed-Content-Hash: src/player/player.tscn 2ccfff3f4d95a807bfd000ab0ed3826f957891d0
+Reviewed-Content-Hash: src/player/player_art.gd 725ecfad459504a57a2ac2095afb5f459f3ee5aa
+Reviewed-Content-Hash: src/player/player_anim_spec.gd d12d8aa9fef836395a2d1f5c16f820282bb9ea85
+Reviewed-Content-Hash: assets/data/player_art.tres 7054d73f21ea6256bec1637a5b245b39b65013e5

@@ -1,5 +1,10 @@
 # Claude Code Game Studios -- Game Studio Agent Architecture
 
+> **언어 규칙 (사용자 지시, 최우선):** 사용자에게 하는 모든 답변은 반드시 한국어로 쓴다.
+> 에이전트 보고·도구 출력·스킬 문서가 영어여도 답변은 한국어다. 파일 경로, 에이전트·스킬 이름,
+> 코드 식별자, 스킬이 정한 기계 판독용 줄(`Run result:`, `Verdict:` 등)만 원문 그대로 둔다.
+> 답변을 보내기 전에 언어를 확인한다.
+
 Indie game development managed through 50 coordinated Claude Code subagents.
 Each agent owns a specific domain, enforcing separation of concerns and quality.
 

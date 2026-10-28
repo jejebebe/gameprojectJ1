@@ -1,0 +1,13 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+OpenGL API 3.3.0 NVIDIA 592.82 - Compatibility - Using Device: NVIDIA - NVIDIA GeForce RTX 4060 Laptop GPU
+SHOT 01-idle.png anim=idle frame=2 flip=false a=1.0
+SHOT 02-run-right.png anim=run frame=6 flip=false a=1.0
+SHOT 03-jump.png anim=jump frame=0 flip=false a=1.0
+SHOT 04-fall.png anim=fall frame=0 flip=false a=1.0
+SHOT 05-run-left-flip.png anim=run frame=6 flip=true a=1.0
+SHOT 06-fireball-set.png anim=idle frame=2 flip=true a=1.0
+SHOT 07-ability-cast.png anim=ability frame=0 flip=true a=1.0
+SHOT 08-glide-set.png anim=idle frame=2 flip=true a=1.0
+SHOT 09-high-jump-set.png anim=idle frame=3 flip=true a=1.0
+SHOT 10-hurt.png anim=hurt frame=0 flip=true a=0.53
+SHOT 11-after-hurt.png anim=idle frame=2 flip=true a=0.88
