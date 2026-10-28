@@ -64,7 +64,7 @@ func _on_body_entered(body: Node2D) -> void:
 		if enemy.is_defeated():
 			# Still fading out: fly past instead of spending the fireball.
 			return
-		enemy.defeat()
+		enemy.take_hit()
 	elif body is Burnable:
 		(body as Burnable).burn()
 	_burst()

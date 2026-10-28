@@ -28,6 +28,9 @@ var _flash_tween: Tween
 var _is_jump_rise: bool = false
 ## Physics frame of the last `bounce()`; -1 = never.
 var _bounce_frame: int = -1
+## Horizontal speed forced by `knock_back` while `_knockback_left` > 0.
+var _knockback_x: float = 0.0
+var _knockback_left: float = 0.0
 
 
 func _ready() -> void:
@@ -59,6 +62,9 @@ func _physics_process(delta: float) -> void:
 	if axis != 0.0:
 		facing = signf(axis)
 	velocity.x = axis * stats.move_speed
+	if _knockback_left > 0.0:
+		_knockback_left -= delta
+		velocity.x = _knockback_x
 	move_and_slide()
 
 
@@ -101,3 +107,11 @@ func _on_protection_changed(active: bool) -> void:
 		_flash_tween = create_tween().set_loops()
 		_flash_tween.tween_property(_look, "modulate:a", health.stats.flash_alpha, health.stats.flash_interval)
 		_flash_tween.tween_property(_look, "modulate:a", 1.0, health.stats.flash_interval)
+
+
+## Pushes the player sideways at `speed_x` (pixels per second, sign = direction)
+## for `time` seconds, overriding left/right input meanwhile. Used by the boss
+## so a stomp cannot chain into repeated stomps on the same spot.
+func knock_back(speed_x: float, time: float) -> void:
+	_knockback_x = speed_x
+	_knockback_left = time

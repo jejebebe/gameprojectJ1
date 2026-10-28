@@ -1,12 +1,12 @@
 # Story 007: 최소 메뉴와 레벨 선택
 
 > **Epic**: jeis-adventure
-> **Status**: Ready
+> **Status**: Complete
 > **Layer**: Presentation
 > **Type**: UI
 > **Estimate**: M
 > **Manifest Version**: N/A (minimal — no control manifest)
-> **Last Updated**: set by /dev-story when implementation begins
+> **Last Updated**: 2026-10-28
 
 ## Context
 
@@ -57,15 +57,13 @@
 
 ## Files
 
-*Planned. `/dev-story` replaces this list with the files it changed.*
-
-- src/ui/main_menu.tscn
-- src/ui/main_menu.gd
-- src/ui/pause_menu.tscn
-- src/ui/level_select.tscn
-- src/ui/level_select.gd
-
----
+- src/ui/menu_layer.gd
+- src/ui/menu_layer.tscn
+- src/ui/touch_controls.gd
+- src/ui/touch_controls.tscn
+- src/layout/split_layout.gd
+- src/layout/split_layout.tscn
+- src/ui/menu_layer.gd.uid
 
 ## QA Test Cases
 
@@ -89,3 +87,12 @@
 
 - Depends on: `production/epics/jeis-adventure/story-001-split-layout-move-jump.md`, `production/epics/jeis-adventure/story-005-levels-1-3.md`
 - Unlocks: None
+
+---
+
+## Completion Notes
+**Completed**: 2026-10-28
+**Criteria**: 6/6 passing. Observed in a scripted run with real mouse/touch events and screenshots (`production/qa/evidence/story-007-menu-level-select/`): main menu at launch, `MENU` opens the pause menu (held touch released), continue, level select 1-3 without locks, back to main menu, clear and game over return to the main menu, large buttons, no ads/purchases/personal-data screens
+**Deviations**: ADVISORY — one `menu_layer.tscn` holds all three menus instead of the planned `main_menu`/`pause_menu`/`level_select` files; `touch_controls.tscn` changed too (MENU button 64 px tall). ADVISORY — menu texts are in the scenes, not localised (`.claude/rules/ui-code.md`), deferred to full production. ADVISORY — Korean text uses the system font fallback and was not tried on a phone; the focus ring from `grab_focus()` may show on touch-only devices; real device touch not tried (first phone build). The engine check found one real bug (MENU and 계속하기 overlap closed the menu at once), fixed: the menu opens on release
+**Test Evidence**: screenshots 01-07, run log and stamp under `production/qa/evidence/story-007-menu-level-select/` (tests waived at qa.level minimal)
+**Reviewed by**: self, no independent review (QL-TEST-COVERAGE, LP-CODE-REVIEW skipped — Solo mode; godot-gdscript-specialist ran an engine-API check)

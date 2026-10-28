@@ -1,7 +1,7 @@
 # Story 009: 보너스 체력 아이템
 
 > **Epic**: jeis-adventure
-> **Status**: In Progress
+> **Status**: Complete
 > **Layer**: Feature
 > **Type**: Integration
 > **Estimate**: M
@@ -96,3 +96,12 @@
 
 - Depends on: `production/epics/jeis-adventure/story-002-health-fail-checkpoint.md`
 - Unlocks: None
+
+---
+
+## Completion Notes
+**Completed**: 2026-10-27
+**Criteria**: 6/6 passing, all observed in scripted runs of the build (`production/qa/evidence/story-009-bonus-heart-item/behaviour-run.log`, screenshots 01-02); the decided item respawn rule (only items ahead of the respawn checkpoint return; game over restores all) was also observed; not yet played by the user
+**Deviations**: ADVISORY — item 1 placed at x=380 instead of x=330 (330 is under platform A). ADVISORY — `HEART_PATTERN` is duplicated in `health_hud.gd` and `bonus_heart.gd` (merge when real art arrives). ADVISORY — `BonusHeart` polls overlaps guarded only by `_collected` while `monitoring` is switched with `set_deferred`; safe with today's call path, add `or not monitoring` to the guard if `reset()` is ever called from a physics callback. ADVISORY — an item placed within ~8 px right of a respawn checkpoint is picked up again at once; keep items away from checkpoints in story 005. Everything was already committed (cead3b0), so scope against `## Files` was not compared
+**Test Evidence**: waived at qa.level minimal (behaviour log and screenshots in `production/qa/evidence/story-009-bonus-heart-item/`)
+**Reviewed by**: self, no independent review (QL-TEST-COVERAGE, LP-CODE-REVIEW skipped — Solo mode; godot-gdscript-specialist ran an engine-API check during /dev-story, no criterion-breaking findings)

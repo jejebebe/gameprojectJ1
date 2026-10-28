@@ -1,0 +1,155 @@
+[gd_scene load_steps=16 format=3]
+
+[ext_resource type="Script" path="res://src/levels/level.gd" id="1_level"]
+[ext_resource type="Script" path="res://src/levels/block.gd" id="2_block"]
+[ext_resource type="PackedScene" path="res://src/player/player.tscn" id="3_player"]
+[ext_resource type="Script" path="res://src/player/look_ahead_camera.gd" id="4_camera"]
+[ext_resource type="Resource" path="res://assets/data/camera_stats.tres" id="5_camstats"]
+[ext_resource type="PackedScene" path="res://src/levels/checkpoint.tscn" id="6_checkpoint"]
+[ext_resource type="PackedScene" path="res://src/levels/spike.tscn" id="7_spike"]
+[ext_resource type="Script" path="res://src/levels/kill_zone.gd" id="8_killzone"]
+[ext_resource type="Script" path="res://src/systems/respawn_manager.gd" id="9_respawn"]
+[ext_resource type="Resource" path="res://assets/data/health_stats.tres" id="10_healthstats"]
+[ext_resource type="PackedScene" path="res://src/enemies/walker.tscn" id="11_walker"]
+[ext_resource type="PackedScene" path="res://src/levels/burnable.tscn" id="12_burnable"]
+[ext_resource type="PackedScene" path="res://src/items/bonus_heart.tscn" id="13_heart"]
+[ext_resource type="PackedScene" path="res://src/levels/level_goal.tscn" id="14_goal"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kill"]
+size = Vector2(3400, 40)
+
+[node name="Level01" type="Node2D" node_paths=PackedStringArray("player", "camera", "respawn_manager", "goal")]
+script = ExtResource("1_level")
+level_length = 3200.0
+player = NodePath("Player")
+camera = NodePath("Player/Camera2D")
+respawn_manager = NodePath("RespawnManager")
+goal = NodePath("Goal")
+
+[node name="Backdrop" type="ColorRect" parent="."]
+offset_right = 3200.0
+offset_bottom = 320.0
+color = Color(0.22, 0.25, 0.3, 1)
+mouse_filter = 2
+
+[node name="Ground1" type="StaticBody2D" parent="."]
+position = Vector2(440, 300)
+script = ExtResource("2_block")
+size = Vector2(880, 40)
+color = Color(0.5, 0.5, 0.5, 1)
+
+[node name="Ground2" type="StaticBody2D" parent="."]
+position = Vector2(1564, 300)
+script = ExtResource("2_block")
+size = Vector2(1272, 40)
+color = Color(0.5, 0.5, 0.5, 1)
+
+[node name="Ground3" type="StaticBody2D" parent="."]
+position = Vector2(2728, 300)
+script = ExtResource("2_block")
+size = Vector2(944, 40)
+color = Color(0.5, 0.5, 0.5, 1)
+
+[node name="Platform1" type="StaticBody2D" parent="."]
+position = Vector2(400, 240)
+script = ExtResource("2_block")
+size = Vector2(96, 16)
+color = Color(0.7, 0.7, 0.7, 1)
+
+[node name="WallLeft" type="StaticBody2D" parent="."]
+position = Vector2(-8, 160)
+script = ExtResource("2_block")
+size = Vector2(16, 400)
+
+[node name="WallRight" type="StaticBody2D" parent="."]
+position = Vector2(3208, 160)
+script = ExtResource("2_block")
+size = Vector2(16, 400)
+
+[node name="SpikeS1" parent="." instance=ExtResource("7_spike")]
+position = Vector2(280, 275)
+
+[node name="SpikeS2" parent="." instance=ExtResource("7_spike")]
+position = Vector2(1160, 275)
+
+[node name="SpikeS3" parent="." instance=ExtResource("7_spike")]
+position = Vector2(1300, 275)
+
+[node name="SpikeS4" parent="." instance=ExtResource("7_spike")]
+position = Vector2(2800, 275)
+
+[node name="CP1" parent="." instance=ExtResource("6_checkpoint")]
+position = Vector2(520, 268)
+
+[node name="CP2" parent="." instance=ExtResource("6_checkpoint")]
+position = Vector2(1040, 268)
+
+[node name="CP3" parent="." instance=ExtResource("6_checkpoint")]
+position = Vector2(1500, 268)
+
+[node name="CP4" parent="." instance=ExtResource("6_checkpoint")]
+position = Vector2(2000, 268)
+
+[node name="CP5" parent="." instance=ExtResource("6_checkpoint")]
+position = Vector2(2360, 268)
+
+[node name="CP6" parent="." instance=ExtResource("6_checkpoint")]
+position = Vector2(2880, 268)
+
+[node name="BurnableB1" parent="." instance=ExtResource("12_burnable")]
+position = Vector2(1840, 232)
+
+[node name="BurnableB2" parent="." instance=ExtResource("12_burnable")]
+position = Vector2(2720, 232)
+
+[node name="HeartH1" parent="." instance=ExtResource("13_heart")]
+position = Vector2(400, 222)
+
+[node name="HeartH2" parent="." instance=ExtResource("13_heart")]
+position = Vector2(1950, 262)
+
+[node name="KillZone" type="Area2D" parent="."]
+position = Vector2(1600, 360)
+collision_mask = 4
+script = ExtResource("8_killzone")
+
+[node name="Shape" type="CollisionShape2D" parent="KillZone"]
+shape = SubResource("RectangleShape2D_kill")
+
+[node name="WalkerA" parent="." instance=ExtResource("11_walker")]
+position = Vector2(700, 272)
+
+[node name="WalkerB" parent="." instance=ExtResource("11_walker")]
+position = Vector2(1660, 272)
+
+[node name="WalkerC" parent="." instance=ExtResource("11_walker")]
+position = Vector2(2540, 272)
+
+[node name="WalkerD" parent="." instance=ExtResource("11_walker")]
+position = Vector2(3000, 272)
+
+[node name="Player" parent="." instance=ExtResource("3_player")]
+position = Vector2(40, 268)
+
+[node name="Camera2D" type="Camera2D" parent="Player" node_paths=PackedStringArray("player")]
+script = ExtResource("4_camera")
+player = NodePath("..")
+stats = ExtResource("5_camstats")
+limit_left = 0
+limit_top = 0
+limit_right = 3200
+limit_bottom = 320
+
+[node name="Goal" parent="." node_paths=PackedStringArray("player") instance=ExtResource("14_goal")]
+position = Vector2(3140, 268)
+player = NodePath("../Player")
+
+[node name="RespawnManager" type="Node" parent="." node_paths=PackedStringArray("player", "checkpoints", "kill_zones", "enemies", "burnables", "bonus_hearts")]
+script = ExtResource("9_respawn")
+player = NodePath("../Player")
+stats = ExtResource("10_healthstats")
+checkpoints = [NodePath("../CP1"), NodePath("../CP2"), NodePath("../CP3"), NodePath("../CP4"), NodePath("../CP5"), NodePath("../CP6")]
+kill_zones = [NodePath("../KillZone")]
+enemies = [NodePath("../WalkerA"), NodePath("../WalkerB"), NodePath("../WalkerC"), NodePath("../WalkerD")]
+burnables = [NodePath("../BurnableB1"), NodePath("../BurnableB2")]
+bonus_hearts = [NodePath("../HeartH1"), NodePath("../HeartH2")]

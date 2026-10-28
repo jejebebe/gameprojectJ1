@@ -25,8 +25,8 @@
 | 002 | 체력, 목숨, 실패, 체크포인트 재시작 | Logic | Complete | N/A |
 | 003 | 적 3종과 밟기·피격 규칙 | Integration | Complete | N/A |
 | 004 | 능력 획득과 사용 (능력 3종) | Integration | Complete | N/A |
-| 005 | 레벨 3개 | Visual/Feel | Ready | N/A |
-| 006 | 보스 1개 | Integration | Ready | N/A |
-| 007 | 최소 메뉴와 레벨 선택 | UI | Ready | N/A |
+| 005 | 레벨 3개 | Visual/Feel | Complete | N/A |
+| 006 | 보스 1개 | Integration | Complete | N/A |
+| 007 | 최소 메뉴와 레벨 선택 | UI | Complete | N/A |
 | 008 | 하트·목숨 표시 | UI | Complete | N/A |
-| 009 | 보너스 체력 아이템 | Integration | Ready | N/A |
+| 009 | 보너스 체력 아이템 | Integration | Complete | N/A |

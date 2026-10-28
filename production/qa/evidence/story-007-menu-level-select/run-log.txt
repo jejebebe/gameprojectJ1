@@ -1,0 +1,25 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+OpenGL API 3.3.0 NVIDIA 592.82 - Compatibility - Using Device: NVIDIA - NVIDIA GeForce RTX 4060 Laptop GPU
+min sizes: start=(280.0, 80.0) lvl1=(280.0, 80.0) menu_panel=(64.0, 64.0)
+LAUNCH (expect main menu, no level, paused) level=none index=-1 paused=true main=true pause=false select=false lives=-1 hud_vis=false
+SHOT 01-main-menu.png
+AFTER START (expect Level01, unpaused, menus hidden, lives 3) level=Level01 index=0 paused=false main=false pause=false select=false lives=3 hud_vis=true
+SHOT 02-in-game-level1.png
+HOLD RIGHT before menu: move_right=true
+AFTER MENU: move_right released=true
+PAUSE (expect paused, pause menu only) level=Level01 index=0 paused=true main=false pause=true select=false lives=3 hud_vis=true
+SHOT 03-pause-menu.png
+RESUME (expect unpaused, Level01) level=Level01 index=0 paused=false main=false pause=false select=false lives=3 hud_vis=true
+LEVEL SELECT from pause level=Level01 index=0 paused=true main=false pause=false select=true lives=3 hud_vis=true
+SHOT 04-level-select.png
+CHOSE LEVEL 3 (expect Level03, unpaused, lives 3) level=Level03 index=2 paused=false main=false pause=false select=false lives=3 hud_vis=true
+SHOT 05-level3-started.png
+TO MAIN (expect no level, main menu) level=none index=2 paused=true main=true pause=false select=false lives=-1 hud_vis=false
+SELECT from main level=none index=2 paused=true main=false pause=false select=true lives=-1 hud_vis=false
+BACK (expect main menu) level=none index=2 paused=true main=true pause=false select=false lives=-1 hud_vis=false
+CHOSE LEVEL 2 from main (expect Level02) level=Level02 index=1 paused=false main=false pause=false select=false lives=3 hud_vis=true
+AFTER GAME OVER (expect main menu, no level) level=none index=1 paused=true main=true pause=false select=false lives=-1 hud_vis=false
+SHOT 06-after-game-over.png
+LEVEL 3 loaded directly level=Level03 index=2 paused=false main=false pause=false select=false lives=3 hud_vis=true
+AFTER LAST LEVEL CLEAR (expect main menu) level=none index=2 paused=true main=true pause=false select=false lives=-1 hud_vis=false
+SHOT 07-after-clear.png

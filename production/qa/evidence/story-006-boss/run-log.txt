@@ -1,0 +1,57 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+OpenGL API 3.3.0 NVIDIA 592.82 - Compatibility - Using Device: NVIDIA - NVIDIA GeForce RTX 4060 Laptop GPU
+LOADED Level03 boss=WAITING hp=3 x=4420 y=268 inv=0.00 gate_layer=0 gate_vis=false label_vis=false
+f=12 STATE WAITING hp=3 x=4420 y=268 inv=0.00 pattern=CHARGE player_x=3960
+BEFORE ENTRY (expect WAITING, gate open) WAITING hp=3 x=4420 y=268 inv=0.00 gate_layer=0
+SHOT 01-arena-before-entry.png f=20
+f=21 STATE IDLE hp=3 x=4420 y=268 inv=0.00 pattern=CHARGE player_x=4200
+AFTER ENTRY (expect gate closed layer 1, boss IDLE, cam limit 4140) cam_limit=4140 gate_layer=1 gate_vis=true IDLE hp=3 x=4420 y=268 inv=0.00
+f=93 STATE TELEGRAPH hp=3 x=4420 y=268 inv=0.00 pattern=CHARGE player_x=4200
+SHOT 02-telegraph-charge.png f=123
+f=153 STATE ATTACK hp=3 x=4446 y=268 inv=0.00 pattern=CHARGE player_x=4200
+SHOT 03-attack-charge.png f=161
+f=230 STATE RECOVER hp=3 x=4154 y=268 inv=0.00 pattern=CHARGE player_x=4200
+f=278 STATE IDLE hp=3 x=4154 y=268 inv=0.00 pattern=CHARGE player_x=4200
+f=350 STATE TELEGRAPH hp=3 x=4154 y=268 inv=0.00 pattern=JUMP_SLAM player_x=4200
+SHOT 02-telegraph-jump_slam.png f=380
+f=410 STATE ATTACK hp=3 x=4154 y=268 inv=0.00 pattern=JUMP_SLAM player_x=4200
+SHOT 03-attack-jump_slam.png f=418
+f=458 STATE DAZED hp=3 x=4200 y=268 inv=0.00 pattern=JUMP_SLAM player_x=4200
+SHOT 04-dazed-landing-dust.png f=464
+f=579 STATE IDLE hp=3 x=4200 y=268 inv=0.00 pattern=JUMP_SLAM player_x=4200
+f=651 STATE TELEGRAPH hp=3 x=4200 y=268 inv=0.00 pattern=SPIKE_RAIN player_x=4200
+SHOT 02-telegraph-spike_rain.png f=681
+f=711 STATE ATTACK hp=3 x=4200 y=268 inv=0.00 pattern=SPIKE_RAIN player_x=4200
+SHOT 03-attack-spike_rain.png f=731
+f=821 STATE RECOVER hp=3 x=4200 y=268 inv=0.00 pattern=SPIKE_RAIN player_x=4200
+f=857 STATE IDLE hp=3 x=4200 y=268 inv=0.00 pattern=SPIKE_RAIN player_x=4200
+CYCLE DONE f=867 player damage events (god mode)=6
+f=910 STATE HURT hp=2 x=4200 y=268 inv=1.98 pattern=SPIKE_RAIN player_x=4320
+FIREBALL HIT (expect hp 2, HURT/flashing) HURT hp=2 x=4200 y=268 inv=1.87
+SHOT 05-fireball-hit-flash.png f=917
+f=969 STATE IDLE hp=2 x=4200 y=268 inv=1.00 pattern=SPIKE_RAIN player_x=4320
+BEFORE DEATH lives=3 IDLE hp=2 x=4200 y=268 inv=0.20
+f=1089 STATE TELEGRAPH hp=3 x=4420 y=268 inv=0.00 pattern=CHARGE player_x=4160
+AFTER DEATH (expect hp 3, x 4420, gate layer 1, player x~4160, lives 8) TELEGRAPH hp=3 x=4446 y=268 inv=0.00 gate_layer=1 player=(4160.0, 268.0) lives=2 spikes_left=0
+SHOT 06-after-death-restored.png f=1117
+f=1149 STATE ATTACK hp=3 x=4446 y=268 inv=0.00 pattern=CHARGE player_x=4160
+f=1226 STATE RECOVER hp=3 x=4154 y=268 inv=0.00 pattern=CHARGE player_x=4160
+f=1274 STATE IDLE hp=3 x=4154 y=268 inv=0.00 pattern=CHARGE player_x=4160
+f=1346 STATE TELEGRAPH hp=3 x=4154 y=268 inv=0.00 pattern=JUMP_SLAM player_x=4160
+f=1406 STATE ATTACK hp=3 x=4154 y=268 inv=0.00 pattern=JUMP_SLAM player_x=4160
+f=1454 STATE DAZED hp=3 x=4160 y=268 inv=0.00 pattern=JUMP_SLAM player_x=4160
+f=1464 STOMP #1 on DAZED hp=3 x=4160 y=268 inv=0.00
+f=1465 STATE HURT hp=2 x=4160 y=268 inv=2.00 pattern=JUMP_SLAM player_x=4162
+f=1525 STATE IDLE hp=2 x=4160 y=268 inv=1.00 pattern=JUMP_SLAM player_x=4226
+f=1586 STOMP #2 on IDLE hp=2 x=4160 y=268 inv=-0.02
+f=1590 STATE HURT hp=1 x=4160 y=268 inv=2.00 pattern=JUMP_SLAM player_x=4162
+f=1650 STATE IDLE hp=1 x=4160 y=268 inv=1.00 pattern=JUMP_SLAM player_x=4226
+f=1711 STOMP #3 on IDLE hp=1 x=4160 y=268 inv=-0.02
+f=1715 STATE DEAD hp=0 x=4160 y=268 inv=-0.02 pattern=JUMP_SLAM player_x=4162
+BOSS DEFEATED f=1715 stomps=3 label_vis=true text=클리어!
+SHOT 07-clear-message.png f=1745
+GOAL triggered? (expect false) false
+JUST BEFORE SWAP goal_triggered=false label_vis=true
+GAME CLEAR
+AFTER CLEAR (expect level 1 instance) level=Level01 index=0 lives=3
+SHOT 08-back-to-level1.png f=1885

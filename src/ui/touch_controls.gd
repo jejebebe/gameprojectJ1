@@ -1,7 +1,7 @@
 class_name TouchControls
 extends Control
 ## Bottom-half control panel: left, right, jump and ability buttons, plus a
-## menu slot (visible but does nothing yet).
+## MENU button that only announces `menu_requested` (the owner opens the menu).
 ##
 ## Every pointer (each touch finger, plus the mouse) is tracked on its own, so
 ## one finger can hold "move" while another presses "jump". Pressed buttons
@@ -11,6 +11,9 @@ extends Control
 ## touches or clicks.
 ##
 ## Usage: instance `touch_controls.tscn` in the bottom half of the screen.
+
+## Emitted when a pointer is pressed on the MENU button.
+signal menu_requested
 
 const MOUSE_POINTER: int = -1
 
@@ -24,6 +27,7 @@ const MOUSE_POINTER: int = -1
 @onready var _right: Panel = $BottomCluster/RightButton
 @onready var _jump: Panel = $BottomCluster/JumpButton
 @onready var _ability: Panel = $BottomCluster/AbilityButton
+@onready var _menu: Panel = $MenuButton
 
 ## Button panel -> input action it drives.
 var _actions: Dictionary[Panel, StringName] = {}
@@ -31,6 +35,8 @@ var _actions: Dictionary[Panel, StringName] = {}
 var _held: Dictionary[int, Panel] = {}
 ## Input action -> whether a touch/mouse pointer currently holds it down.
 var _pointer_down: Dictionary[StringName, bool] = {}
+## Pointer ids whose press started on the MENU button (menu opens on release).
+var _menu_pressed: Dictionary[int, bool] = {}
 
 
 func _ready() -> void:
@@ -50,6 +56,7 @@ func _input(event: InputEvent) -> void:
 	var touch := event as InputEventScreenTouch
 	if touch != null:
 		_set_pointer(touch.index, touch.pressed, touch.position)
+		_check_menu(touch.index, touch.pressed, touch.position)
 		return
 	var drag := event as InputEventScreenDrag
 	if drag != null:
@@ -59,6 +66,7 @@ func _input(event: InputEvent) -> void:
 	if button != null:
 		if button.button_index == MOUSE_BUTTON_LEFT:
 			_set_pointer(MOUSE_POINTER, button.pressed, button.position)
+			_check_menu(MOUSE_POINTER, button.pressed, button.position)
 		return
 	var motion := event as InputEventMouseMotion
 	if motion != null and (motion.button_mask & MOUSE_BUTTON_MASK_LEFT) != 0:
@@ -74,6 +82,35 @@ func _set_pointer(pointer: int, pressed: bool, screen_pos: Vector2) -> void:
 			if panel.get_global_rect().has_point(screen_pos):
 				_held[pointer] = panel
 				break
+	_apply_held()
+
+
+## Releases every pointer and every action this panel is holding down (call when
+## a menu opens, so no button stays stuck). Keyboard input is not touched.
+func release_all() -> void:
+	_held.clear()
+	_menu_pressed.clear()
+	_apply_held()
+
+
+## Emits `menu_requested` when a pointer that was pressed on the MENU button is
+## released on it. Opening on release (not press) keeps the same tap from also
+## reaching a menu button that appears under the finger.
+func _check_menu(pointer: int, pressed: bool, screen_pos: Vector2) -> void:
+	var on_menu := _menu.get_global_rect().has_point(screen_pos)
+	if pressed:
+		if on_menu:
+			_menu_pressed[pointer] = true
+		return
+	var started_on_menu: bool = _menu_pressed.get(pointer, false)
+	_menu_pressed.erase(pointer)
+	if started_on_menu and on_menu:
+		get_viewport().set_input_as_handled()
+		menu_requested.emit()
+
+
+## Syncs button looks and input actions with `_held`.
+func _apply_held() -> void:
 	for panel: Panel in _actions:
 		var down: bool = _held.values().has(panel)
 		panel.modulate = Color(0.7, 0.7, 0.7) if down else Color.WHITE

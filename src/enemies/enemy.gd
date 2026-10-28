@@ -100,7 +100,7 @@ func _resolve_contact(player: Player) -> void:
 		and player.get_feet_y() <= global_position.y + stats.stomp_tolerance
 	)
 	if is_stomp:
-		defeat()
+		take_hit()
 		player.bounce()
 		if stats.granted_ability != null:
 			player.ability_holder.acquire(stats.granted_ability)
@@ -154,6 +154,12 @@ func _deactivate() -> void:
 	set_physics_process(false)
 	_body_shape.set_deferred(&"disabled", true)
 	_hit_area.set_deferred(&"monitoring", false)
+
+
+## Called when a stomp or a fireball hits the enemy. A normal enemy is defeated
+## at once; a boss overrides this to lose health instead (story-006).
+func take_hit() -> void:
+	defeat()
 
 
 ## Defeats the enemy (flatten and fade, then hidden and inactive until

@@ -81,16 +81,55 @@ var _ability: Ability = null
 
 
 func _ready() -> void:
+	# Scene-wired sources (node_path exports) are bound at once; otherwise the
+	# owner calls `bind` when the level is loaded.
+	if health != null and respawn_manager != null and ability_holder != null:
+		bind(health, respawn_manager, ability_holder)
+
+
+## Switches the HUD to new sources (e.g. after a level change): disconnects the
+## previous ones, connects `health_changed`, `lives_changed` and
+## `ability_changed` of the new ones and refreshes the display at once.
+## Call after this node and the new sources are ready.
+func bind(
+	new_health: HealthComponent,
+	new_respawn_manager: RespawnManager,
+	new_ability_holder: AbilityHolder
+) -> void:
+	assert(new_health != null, "HealthHud.bind: health is null")
+	assert(new_respawn_manager != null, "HealthHud.bind: respawn_manager is null")
+	assert(new_ability_holder != null, "HealthHud.bind: ability_holder is null")
+	_disconnect_sources()
+	health = new_health
+	respawn_manager = new_respawn_manager
+	ability_holder = new_ability_holder
 	health.health_changed.connect(_on_health_changed)
 	respawn_manager.lives_changed.connect(_on_lives_changed)
-	# The level may have emitted its first values before this node was ready.
+	ability_holder.ability_changed.connect(_on_ability_changed)
+	# The level may have emitted its first values before the HUD was bound.
 	_on_health_changed(health.current, health.stats.max_health)
 	_on_lives_changed(respawn_manager.lives, respawn_manager.stats.start_lives)
-	ability_holder.ability_changed.connect(_on_ability_changed)
 	_on_ability_changed(ability_holder.current)
 
 
+func _disconnect_sources() -> void:
+	if is_instance_valid(health) and health.health_changed.is_connected(_on_health_changed):
+		health.health_changed.disconnect(_on_health_changed)
+	if (
+		is_instance_valid(respawn_manager)
+		and respawn_manager.lives_changed.is_connected(_on_lives_changed)
+	):
+		respawn_manager.lives_changed.disconnect(_on_lives_changed)
+	if (
+		is_instance_valid(ability_holder)
+		and ability_holder.ability_changed.is_connected(_on_ability_changed)
+	):
+		ability_holder.ability_changed.disconnect(_on_ability_changed)
+
+
 func _draw() -> void:
+	if health == null:
+		return
 	var bonus: int = clampi(_current_health - _max_health, 0, health.stats.max_bonus_hearts)
 	var full: int = mini(_current_health, _max_health)
 	var heart_step: int = HEART_PATTERN[0].length() * pixel_size + heart_spacing

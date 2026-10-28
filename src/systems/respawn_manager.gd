@@ -68,6 +68,14 @@ func _ready() -> void:
 	_initialized = true
 
 
+## Sets the lives left (e.g. carried over from the previous level) and emits
+## `lives_changed`. Call after this node's `_ready`; `n` must be > 0.
+func set_lives(n: int) -> void:
+	assert(n > 0, "RespawnManager.set_lives: n must be > 0")
+	lives = mini(n, stats.start_lives)
+	lives_changed.emit(lives, stats.start_lives)
+
+
 func _physics_process(_delta: float) -> void:
 	if not _initialized or _fail_queued:
 		return
