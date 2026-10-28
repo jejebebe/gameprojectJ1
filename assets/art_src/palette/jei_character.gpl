@@ -34,3 +34,24 @@ Columns: 8
 161  51  57	A13339 char_29
 254 173 158	FEAD9E char_30
 158  29  39	9E1D27 char_31
+# Ability cape sets (2026-10-28). Roles map from the red cape: hi=C33132 mid=961824 lo=5C121F alt=9E1D27 deep=4F181E tie=43141C.
+236 124  42	EC7C2A cape_orange_hi
+180  74  28	B44A1C cape_orange_mid
+122  44  20	7A2C14 cape_orange_lo
+196  90  32	C45A20 cape_orange_alt
+ 86  32  15	56200F cape_orange_deep
+ 72  24  14	48180E cape_orange_tie
+255 243 160	FFF3A0 flame_core
+ 58 156 220	3A9CDC cape_blue_hi
+ 38 104 174	2668AE cape_blue_mid
+ 23  64 122	17407A cape_blue_lo
+ 42 120 188	2A78BC cape_blue_alt
+ 20  46  88	142E58 cape_blue_deep
+ 17  38  74	11264A cape_blue_tie
+238 111 166	EE6FA6 cape_pink_hi
+194  76 134	C24C86 cape_pink_mid
+130  40  90	82285A cape_pink_lo
+210  86 144	D25690 cape_pink_alt
+ 94  30  68	5E1E44 cape_pink_deep
+ 78  26  58	4E1A3A cape_pink_tie
+255 179  71	FFB347 flame_mid
