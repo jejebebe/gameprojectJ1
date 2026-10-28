@@ -126,6 +126,34 @@ local function capeSpec(p)
     local u = math.abs(x - cx) / 20
     return p.hem - lift * u * u + p.hamp * s.HW(x)
   end
+  if p.scallop then
+    -- Smooth-scallop hem (jump/fall): one long sine across the whole width
+    -- (no mirrored cusp at the centre), folds sliding sideways frame to frame.
+    -- Heights are pre-rasterised and de-toothed so every step on a curve is a
+    -- run of >= 2 px and no single-pixel teeth remain.
+    s.HW = function(x) return math.sin(TAU * (x - cx) / p.per - ph) end
+    local hy = {}
+    for x = X0 - 1, X1 + 1 do
+      local u = math.abs(x - cx) / 20
+      hy[x] = rnd(p.hem - lift * u * u + p.hamp * s.HW(x))
+    end
+    for _ = 1, 2 do
+      local o = {}
+      for x = X0 - 1, X1 + 1 do o[x] = hy[x] end
+      for x = X0, X1 do
+        local a, b, v = o[x - 1], o[x + 1], o[x]
+        -- tooth: 1 px column sticking out past both neighbours
+        if (v > a and v > b) or (v < a and v < b) then
+          hy[x] = (math.abs(a - v) <= math.abs(b - v)) and a or b
+        -- lone 1 px step on a shallow stretch: join the run nearer the crest
+        -- (skipped on the steep billowed corners, where 1 px steps are the curve)
+        elseif a ~= b and v ~= a and v ~= b and lift * math.abs(x - cx) / 200 < 0.4 then
+          hy[x] = math.max(a, b)
+        end
+      end
+    end
+    s.H = function(x) return hy[x] or rnd(p.hem) end
+  end
   return s
 end
 
@@ -385,7 +413,7 @@ for f = 1, 3 do
   local cape, mask = capeLayer(capeSpec({ f = f, n = 3, top = 33, hem = 49,
     L0 = function(y) return math.max(5, 10 - 0.6 * (y - 33)) end,
     R0 = function(y) return math.min(35, 29 + 0.6 * (y - 33)) end,
-    amp = 2, vper = 7, hamp = 1.8, per = 9, lin = 42, ld = 1 }))
+    amp = 2, vper = 7, hamp = 1.2, per = 14, scallop = true, lin = 42, ld = 1 }))
   local body = copy(JUMP_BODY)
   stamp(body, 12, 46 + JUMP_LEG_Y[f][1], TUCK)
   stamp(body, 21, 46 + JUMP_LEG_Y[f][2], TUCK)
@@ -412,7 +440,7 @@ for f = 1, 3 do
   local cape, mask = capeLayer(capeSpec({ f = f, n = 3, top = 32, hem = 47, lift = 9,
     L0 = function(y) return math.max(-3, 10 - 1.7 * (y - 33)) end,
     R0 = function(y) return math.min(42, 29 + 1.7 * (y - 33)) end,
-    amp = 1.6, vper = 6, hamp = 2, per = 10, lin = 38, ld = 2 }))
+    amp = 1.6, vper = 6, hamp = 1.5, per = 17, scallop = true, lin = 38, ld = 2 }))
   local body = copy(FALL_BODY)
   stamp(body, 11, 46, f == 3 and kicked(DANG_L) or DANG_L)
   stamp(body, 21, 46, f == 1 and kicked(DANG_R) or DANG_R)
