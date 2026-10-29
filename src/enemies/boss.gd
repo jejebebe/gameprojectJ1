@@ -216,7 +216,6 @@ func _reset_behaviour() -> void:
 	_pattern_index = 0
 	_state_time = 0.0
 	_state = State.IDLE if _fight_started else State.WAITING
-	_sprite.flip_h = false
 	_dust.hide()
 
 
@@ -272,9 +271,10 @@ func _direction_to_player() -> float:
 	return d if d != 0.0 else -1.0
 
 
-## The art faces left, so facing right flips it.
-func _face(direction: float) -> void:
-	_sprite.flip_h = direction > 0.0
+## Faces left (toward the arena entrance) when placed and after a reset;
+## `Enemy._face` handles the flip from `stats.art_faces_left`.
+func _start_facing() -> float:
+	return Vector2.LEFT.x
 
 
 func _next_pattern() -> Pattern:

@@ -31,3 +31,4 @@
 | 008 | 하트·목숨 표시 | UI | Complete | N/A |
 | 009 | 보너스 체력 아이템 | Integration | Complete | N/A |
 | 010 | 제이 그림과 동작을 게임에 넣기 | Visual/Feel | Complete | N/A |
+| 011 | 적 3종과 보스 그림 교체 | Visual/Feel | Complete | N/A |

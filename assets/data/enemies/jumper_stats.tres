@@ -1,16 +1,16 @@
 [gd_resource type="Resource" script_class="EnemyStats" load_steps=4 format=3]
 
 [ext_resource type="Script" path="res://src/enemies/enemy_stats.gd" id="1_stats"]
-[ext_resource type="Texture2D" path="res://assets/art/enemies/jumper_sheet.png" id="2_sheet"]
+[ext_resource type="Texture2D" path="res://assets/art/enemies/jumper/move.png" id="2_sheet"]
 [ext_resource type="Resource" path="res://assets/data/abilities/high_jump.tres" id="3_highjump"]
 
 [resource]
 script = ExtResource("1_stats")
 granted_ability = ExtResource("3_highjump")
 sprite_sheet = ExtResource("2_sheet")
-frame_size = Vector2i(16, 16)
-frame_count = 3
-fps = 5.0
+frame_size = Vector2i(24, 24)
+frame_count = 8
+fps = 11.0
 damage = 1
 defeat_time = 0.3
 defeat_squash_scale = 0.2

@@ -2,91 +2,98 @@
 
 [ext_resource type="Script" path="res://src/enemies/boss_stats.gd" id="1_stats"]
 [ext_resource type="Script" path="res://src/enemies/boss_strip.gd" id="2_strip"]
-[ext_resource type="Texture2D" path="res://assets/art/enemies/boss/idle.png" id="3_idle"]
-[ext_resource type="Texture2D" path="res://assets/art/enemies/boss/shake.png" id="4_shake"]
-[ext_resource type="Texture2D" path="res://assets/art/enemies/boss/crouch.png" id="5_crouch"]
-[ext_resource type="Texture2D" path="res://assets/art/enemies/boss/puff.png" id="6_puff"]
-[ext_resource type="Texture2D" path="res://assets/art/enemies/boss/roll.png" id="7_roll"]
-[ext_resource type="Texture2D" path="res://assets/art/enemies/boss/jump.png" id="8_jump"]
-[ext_resource type="Texture2D" path="res://assets/art/enemies/boss/dazed.png" id="9_dazed"]
-[ext_resource type="Texture2D" path="res://assets/art/enemies/boss/hurt.png" id="10_hurt"]
-[ext_resource type="Texture2D" path="res://assets/art/enemies/boss/dust.png" id="11_dust"]
-[ext_resource type="Texture2D" path="res://assets/art/enemies/boss/spike.png" id="12_spike"]
+[ext_resource type="Texture2D" path="res://assets/art/enemies/boss/v2/idle.png" id="3_idle"]
+[ext_resource type="Texture2D" path="res://assets/art/enemies/boss/v2/shake.png" id="4_shake"]
+[ext_resource type="Texture2D" path="res://assets/art/enemies/boss/v2/crouch.png" id="5_crouch"]
+[ext_resource type="Texture2D" path="res://assets/art/enemies/boss/v2/puff.png" id="6_puff"]
+[ext_resource type="Texture2D" path="res://assets/art/enemies/boss/v2/roll.png" id="7_roll"]
+[ext_resource type="Texture2D" path="res://assets/art/enemies/boss/v2/jump.png" id="8_jump"]
+[ext_resource type="Texture2D" path="res://assets/art/enemies/boss/v2/dazed.png" id="9_dazed"]
+[ext_resource type="Texture2D" path="res://assets/art/enemies/boss/v2/hurt.png" id="10_hurt"]
+[ext_resource type="Texture2D" path="res://assets/art/enemies/boss/v2/dust.png" id="11_dust"]
+[ext_resource type="Texture2D" path="res://assets/art/enemies/boss/v2/spike.png" id="12_spike"]
 
 [sub_resource type="Resource" id="Resource_shake"]
 script = ExtResource("2_strip")
 animation = &"shake"
 sheet = ExtResource("4_shake")
-frame_count = 4
-fps = 16.0
+frame_size = Vector2i(72, 60)
+frame_count = 8
+fps = 20.0
 
 [sub_resource type="Resource" id="Resource_crouch"]
 script = ExtResource("2_strip")
 animation = &"crouch"
 sheet = ExtResource("5_crouch")
-frame_count = 3
-fps = 3.0
+frame_size = Vector2i(72, 60)
+frame_count = 6
+fps = 14.2857
 loop = false
 
 [sub_resource type="Resource" id="Resource_puff"]
 script = ExtResource("2_strip")
 animation = &"puff"
 sheet = ExtResource("6_puff")
-frame_count = 4
-fps = 4.0
+frame_size = Vector2i(72, 60)
+frame_count = 8
+fps = 16.6667
 loop = false
 
 [sub_resource type="Resource" id="Resource_roll"]
 script = ExtResource("2_strip")
 animation = &"roll"
 sheet = ExtResource("7_roll")
-frame_count = 4
-fps = 16.0
+frame_size = Vector2i(72, 60)
+frame_count = 8
+fps = 16.6667
 
 [sub_resource type="Resource" id="Resource_jump"]
 script = ExtResource("2_strip")
 animation = &"jump"
 sheet = ExtResource("8_jump")
-frame_count = 2
-fps = 6.0
+frame_size = Vector2i(72, 60)
+frame_count = 4
+fps = 10.0
 
 [sub_resource type="Resource" id="Resource_dazed"]
 script = ExtResource("2_strip")
 animation = &"dazed"
 sheet = ExtResource("9_dazed")
-frame_count = 4
-fps = 6.0
+frame_size = Vector2i(72, 60)
+frame_count = 8
+fps = 9.0909
 
 [sub_resource type="Resource" id="Resource_hurt"]
 script = ExtResource("2_strip")
 animation = &"hurt"
 sheet = ExtResource("10_hurt")
-frame_count = 2
-fps = 8.0
+frame_size = Vector2i(72, 60)
+frame_count = 4
+fps = 14.2857
 
 [sub_resource type="Resource" id="Resource_dust"]
 script = ExtResource("2_strip")
 animation = &"dust"
 sheet = ExtResource("11_dust")
-frame_size = Vector2i(40, 16)
-frame_count = 4
-fps = 12.0
+frame_size = Vector2i(24, 24)
+frame_count = 8
+fps = 16.6667
 loop = false
 
 [sub_resource type="Resource" id="Resource_spike"]
 script = ExtResource("2_strip")
 animation = &"spike"
 sheet = ExtResource("12_spike")
-frame_size = Vector2i(12, 20)
-frame_count = 2
+frame_size = Vector2i(16, 28)
+frame_count = 4
 fps = 10.0
 
 [resource]
 script = ExtResource("1_stats")
 sprite_sheet = ExtResource("3_idle")
-frame_size = Vector2i(32, 24)
+frame_size = Vector2i(72, 60)
 frame_count = 4
-fps = 6.0
+fps = 5.5556
 damage = 1
 stomp_tolerance = 6.0
 max_hp = 3

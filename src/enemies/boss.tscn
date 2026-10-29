@@ -21,6 +21,7 @@ stats = ExtResource("2_stats")
 shape = SubResource("RectangleShape2D_body")
 
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
+position = Vector2(2, -18)
 
 [node name="HitArea" type="Area2D" parent="."]
 collision_layer = 0

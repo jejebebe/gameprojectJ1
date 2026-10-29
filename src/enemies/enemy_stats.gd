@@ -16,6 +16,10 @@ extends Resource
 @export var frame_count: int = 2
 ## Animation speed in frames per second.
 @export var fps: float = 6.0
+## True when the art is drawn facing left; the sprite is flipped to face right.
+## (Where the sprite sits on the body is the `Sprite` node position in the scene,
+## given for this drawn direction; it is mirrored on x when the sprite flips.)
+@export var art_faces_left: bool = true
 
 @export_group("Ability")
 ## Ability the player gets when stomping this enemy; empty = grants nothing.

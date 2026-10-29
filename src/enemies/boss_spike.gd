@@ -62,7 +62,10 @@ func setup(stats: BossStats, x: float, floor_y: float) -> void:
 	_sprite.sprite_frames = frames
 	_sprite.play(&"default")
 	_half_height = strip.frame_size.y * 0.5
-	(_shape.shape as RectangleShape2D).size = Vector2(strip.frame_size.x - 2, strip.frame_size.y - 2)
+	# The art points down: the hitbox (size set in the scene) sits at the bottom
+	# of the frame, on the tip, not at the blunt top.
+	var hitbox := _shape.shape as RectangleShape2D
+	_shape.position.y = _half_height - hitbox.size.y * 0.5
 	global_position = Vector2(x, floor_y - _half_height - _stats.spike_fall_height)
 	_shadow.global_position = Vector2(x - _shadow.size.x * 0.5, floor_y - _shadow.size.y)
 	_phase = Phase.SHADOW

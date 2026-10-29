@@ -55,3 +55,13 @@ Columns: 8
  94  30  68	5E1E44 cape_pink_deep
  78  26  58	4E1A3A cape_pink_tie
 255 179  71	FFB347 flame_mid
+# Boss spiky mole (story 011, 2026-10-28): brown body 3 steps (mid = art-bible #8A5A3C), cream belly/paws/spikes (#F6EEE4 + one shade), spike tips (#9060A8 + #6E4A6A).
+176 122  82	B07A52 boss_brown_hi
+138  90  60	8A5A3C boss_brown
+100  64  44	64402C boss_brown_lo
+246 238 228	F6EEE4 boss_cream
+220 201 180	DCC9B4 boss_cream_lo
+144  96 168	9060A8 boss_purple
+110  74 106	6E4A6A boss_purple_lo
+# Enemies (story 011, 2026-10-28): body = boss_purple 9060A8 / boss_purple_lo 6E4A6A (art-bible §5), horn/wings = boss_cream F6EEE4 / boss_cream_lo DCC9B4, plus a light purple highlight.
+180 140 204	B48CCC enemy_purple_light

@@ -16,6 +16,12 @@ func _behave(delta: float) -> void:
 	move_and_slide()
 
 
+## Jumps in place, so it keeps one facing: left, toward a player coming from
+## the level start.
+func _start_facing() -> float:
+	return Vector2.LEFT.x
+
+
 ## Restarts the jump timer when the enemy is reset to its start.
 func _reset_behaviour() -> void:
 	_time_since_jump = 0.0

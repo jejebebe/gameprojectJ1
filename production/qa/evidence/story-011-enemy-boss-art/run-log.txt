@@ -1,0 +1,22 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+OpenGL API 3.3.0 NVIDIA 592.82 - Compatibility - Using Device: NVIDIA - NVIDIA GeForce RTX 4060 Laptop GPU
+SHOT 01-walker.png
+walker flip=true dir=1.0
+SHOT 02-jumper.png
+SHOT 03-flyer.png
+SHOT 04-boss-before.png
+f=176 boss anim=default flip=false x=4420
+f=243 boss anim=shake flip=false x=4420
+SHOT 05-boss-shake.png
+f=303 boss anim=roll flip=false x=4446
+SHOT 05-boss-roll.png
+f=380 boss anim=default flip=false x=4154
+f=500 boss anim=crouch flip=true x=4154
+SHOT 05-boss-crouch.png
+f=560 boss anim=jump flip=true x=4154
+SHOT 05-boss-jump.png
+f=608 boss anim=dazed flip=true x=4200
+SHOT 05-boss-dazed.png
+f=729 boss anim=default flip=true x=4200
+f=801 boss anim=puff flip=false x=4200
+SHOT 05-boss-puff.png

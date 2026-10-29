@@ -51,6 +51,7 @@ func _ready() -> void:
 		frames.add_frame(&"default", frame)
 	_sprite.sprite_frames = frames
 	_sprite.play(&"default")
+	_face(_start_facing())
 
 
 func _physics_process(delta: float) -> void:
@@ -78,6 +79,7 @@ func _apply_gravity(delta: float) -> void:
 ## turns around at both ends and at walls. Calls `move_and_slide`.
 func _patrol_step() -> void:
 	velocity.x = _direction * stats.move_speed
+	_face(_direction)
 	move_and_slide()
 	var offset := global_position.x - _origin_x
 	var half := stats.travel_distance * 0.5
@@ -134,11 +136,30 @@ func reset_to_start() -> void:
 	_sprite.position = _sprite_start_position
 	_sprite.scale = _sprite_start_scale
 	_sprite.modulate = _sprite_start_modulate
+	_face(_start_facing())
 	_sprite.play(&"default")
 	show()
 	set_physics_process(true)
 	_body_shape.set_deferred(&"disabled", false)
 	_hit_area.set_deferred(&"monitoring", true)
+
+
+## Turns the sprite to face `direction` (> 0 right, < 0 left; 0 keeps the
+## current facing). The art's drawn direction comes from `stats.art_faces_left`;
+## the scene's sprite x offset is mirrored with the flip so the body stays on the
+## collision box.
+func _face(direction: float) -> void:
+	if direction == 0.0:
+		return
+	var flip := (direction > 0.0) if stats.art_faces_left else (direction < 0.0)
+	_sprite.flip_h = flip
+	_sprite.position.x = -_sprite_start_position.x if flip else _sprite_start_position.x
+
+
+## Direction the enemy faces when placed and after `reset_to_start`. Moving
+## enemies face their start patrol direction; overridden by enemies that stand.
+func _start_facing() -> float:
+	return _direction
 
 
 ## Resets subclass-specific behaviour state. Overridden by enemy types that
