@@ -5,7 +5,7 @@
 [ext_resource type="Script" path="res://src/levels/looping_strip.gd" id="3_strip"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_area"]
-size = Vector2(14, 12)
+size = Vector2(21, 18)
 
 [node name="BonusHeart" type="Area2D"]
 collision_layer = 0

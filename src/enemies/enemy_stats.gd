@@ -34,19 +34,19 @@ extends Resource
 @export var defeat_squash_scale: float = 0.2
 ## Pixels below the enemy's centre line at which the player's feet still count
 ## as a stomp. Absorbs the one-frame lag of area overlap reporting.
-@export var stomp_tolerance: float = 6.0
+@export var stomp_tolerance: float = 9.0
 
 @export_group("Movement")
 ## Horizontal speed in pixels per second (Walker, Flyer).
-@export var move_speed: float = 40.0
+@export var move_speed: float = 60.0
 ## Total length of the horizontal path, centred on the placed position, in pixels (Walker, Flyer).
-@export var travel_distance: float = 100.0
+@export var travel_distance: float = 150.0
 ## Downward acceleration in pixels per second squared (Walker, Jumper).
-@export var gravity: float = 900.0
+@export var gravity: float = 1350.0
 ## Seconds between jumps (Jumper).
 @export var jump_interval: float = 1.5
 ## Initial upward speed of a jump (negative is up) in pixels per second (Jumper).
-@export var jump_velocity: float = -250.0
+@export var jump_velocity: float = -375.0
 ## Height of the vertical bob in pixels; 0 for a straight flight (Flyer).
 @export var bob_amplitude: float = 0.0
 ## Speed of the vertical bob in radians per second (Flyer).

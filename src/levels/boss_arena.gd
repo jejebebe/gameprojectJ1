@@ -31,10 +31,12 @@ signal cleared
 ## Text of the clear message.
 @export var message_text: String = "클리어!"
 ## Camera of the level. While the gate is closed its left limit is
-## `fight_camera_limit_left`, so the whole arena (and every telegraph) stays
-## in view; it is restored when the gate opens.
+## `fight_camera_limit_left` (restored when the gate opens), and if it is a
+## `LookAheadCamera` it is focused on the boss during the fight so it centres
+## between the player and the boss (story-013); the right side is clamped by the
+## camera's own `limit_right` (level end).
 @export var camera: Camera2D
-## Camera left limit during the fight (level right edge minus the view width).
+## Camera left limit during the fight (the arena's left edge: the gate's right face).
 @export var fight_camera_limit_left: int = 0
 
 var _is_closed: bool = false
@@ -62,6 +64,7 @@ func _physics_process(delta: float) -> void:
 	if not _is_closed and player.global_position.x >= trigger_x:
 		_set_gate(true)
 		boss.start_fight()
+		_set_camera_focus(true)
 	if _clear_left >= 0.0:
 		_clear_left -= delta
 		if _clear_left < 0.0:
@@ -83,7 +86,20 @@ func _set_gate(is_closed: bool) -> void:
 	camera.limit_left = fight_camera_limit_left if is_closed else _start_limit_left
 
 
+## Focuses the camera on the boss (or clears the focus). No-op when the camera
+## is a plain Camera2D.
+func _set_camera_focus(is_focused: bool) -> void:
+	var look_camera: LookAheadCamera = camera as LookAheadCamera
+	if look_camera == null:
+		return
+	if is_focused:
+		look_camera.set_focus(boss)
+	else:
+		look_camera.clear_focus()
+
+
 func _on_boss_defeated() -> void:
+	_set_camera_focus(false)
 	message_label.text = message_text
 	message_label.show()
 	_clear_left = (boss.stats as BossStats).clear_message_time
@@ -94,8 +110,12 @@ func _on_boss_restored() -> void:
 		return
 	_clear_left = -1.0
 	message_label.hide()
+	# Respawn inside the arena keeps the fight going (gate stays closed), so the
+	# camera keeps (or, after a defeat was undone, regains) the boss focus.
+	_set_camera_focus(_is_closed)
 
 
 func _on_game_over() -> void:
+	_set_camera_focus(false)
 	_set_gate(false)
 	boss.stop_fight()

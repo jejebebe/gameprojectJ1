@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" path="res://assets/art/props/spike.png" id="2_tex"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_area"]
-size = Vector2(16, 10)
+size = Vector2(24, 15)
 
 [node name="Spike" type="Area2D"]
 collision_mask = 4
@@ -15,5 +15,5 @@ damage = 1
 shape = SubResource("RectangleShape2D_area")
 
 [node name="Look" type="Sprite2D" parent="."]
-position = Vector2(0, -3)
+position = Vector2(0, -0.5)
 texture = ExtResource("2_tex")

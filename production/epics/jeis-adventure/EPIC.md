@@ -33,3 +33,4 @@
 | 010 | 제이 그림과 동작을 게임에 넣기 | Visual/Feel | Complete | N/A |
 | 011 | 적 3종과 보스 그림 교체 | Visual/Feel | Complete | N/A |
 | 012 | 타일·소품·배경·UI 그림 교체 | Visual/Feel | Complete | N/A |
+| 013 | 월드 1.5배 맞춤 + 글꼴·정리 | Integration | Complete | N/A |

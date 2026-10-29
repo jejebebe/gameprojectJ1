@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://src/enemies/boss_spike.gd" id="1_script"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_area"]
-size = Vector2(10, 18)
+size = Vector2(15, 27)
 
 [node name="BossSpike" type="Area2D"]
 collision_layer = 0
@@ -16,7 +16,7 @@ shape = SubResource("RectangleShape2D_area")
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
 
 [node name="Shadow" type="ColorRect" parent="."]
-offset_right = 20.0
-offset_bottom = 4.0
+offset_right = 30.0
+offset_bottom = 6.0
 mouse_filter = 2
 color = Color(0, 0, 0, 0.55)

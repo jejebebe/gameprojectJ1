@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3]
+[gd_scene load_steps=24 format=3]
 
 [ext_resource type="Script" path="res://src/levels/level.gd" id="1_level"]
 [ext_resource type="Script" path="res://src/levels/block.gd" id="2_block"]
@@ -21,13 +21,14 @@
 [ext_resource type="Script" path="res://src/levels/level_backdrop.gd" id="19_backdrop"]
 [ext_resource type="Resource" path="res://assets/data/backgrounds/bg_l3.tres" id="20_bg"]
 [ext_resource type="Resource" path="res://assets/data/backgrounds/bg_boss.tres" id="21_bgboss"]
+[ext_resource type="Theme" path="res://assets/data/ui_theme.tres" id="22_theme"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kill"]
-size = Vector2(4700, 40)
+size = Vector2(7050, 60)
 
 [node name="Level03" type="Node2D" node_paths=PackedStringArray("player", "camera", "respawn_manager", "goal")]
 script = ExtResource("1_level")
-level_length = 4500.0
+level_length = 6750.0
 player = NodePath("Player")
 camera = NodePath("Player/Camera2D")
 respawn_manager = NodePath("RespawnManager")
@@ -38,100 +39,100 @@ script = ExtResource("19_backdrop")
 background = ExtResource("20_bg")
 boss_background = ExtResource("21_bgboss")
 player = NodePath("../Player")
-boss_switch_x = 4120.0
+boss_switch_x = 6180.0
 
 [node name="Ground1" type="StaticBody2D" parent="."]
-position = Vector2(670, 300)
+position = Vector2(1005, 310)
 script = ExtResource("2_block")
-size = Vector2(1340, 40)
+size = Vector2(2010, 60)
 style = 0
 
 [node name="Ground2" type="StaticBody2D" parent="."]
-position = Vector2(2294, 300)
+position = Vector2(3441, 310)
 script = ExtResource("2_block")
-size = Vector2(1572, 40)
+size = Vector2(2358, 60)
 style = 0
 
 [node name="Ground3" type="StaticBody2D" parent="."]
-position = Vector2(3874, 300)
+position = Vector2(5811, 310)
 script = ExtResource("2_block")
-size = Vector2(1252, 40)
+size = Vector2(1878, 60)
 style = 0
 
 [node name="Cliff1" type="StaticBody2D" parent="."]
-position = Vector2(1984, 220)
+position = Vector2(2976, 190)
 script = ExtResource("2_block")
-size = Vector2(128, 120)
+size = Vector2(192, 180)
 
 [node name="Cliff2" type="StaticBody2D" parent="."]
-position = Vector2(3724, 220)
+position = Vector2(5586, 190)
 script = ExtResource("2_block")
-size = Vector2(128, 120)
+size = Vector2(192, 180)
 
 [node name="Platform1" type="StaticBody2D" parent="."]
-position = Vector2(380, 240)
+position = Vector2(570, 220)
 script = ExtResource("2_block")
-size = Vector2(96, 16)
+size = Vector2(144, 24)
 
 [node name="WallLeft" type="StaticBody2D" parent="."]
-position = Vector2(-8, 160)
+position = Vector2(-12, 100)
 script = ExtResource("2_block")
-size = Vector2(16, 400)
+size = Vector2(24, 600)
 style = 3
 
 [node name="WallRight" type="StaticBody2D" parent="."]
-position = Vector2(4508, 160)
+position = Vector2(6762, 100)
 script = ExtResource("2_block")
-size = Vector2(16, 400)
+size = Vector2(24, 600)
 style = 3
 
 [node name="SpikeS1" parent="." instance=ExtResource("7_spike")]
-position = Vector2(260, 275)
+position = Vector2(390, 272.5)
 
 [node name="SpikeS2" parent="." instance=ExtResource("7_spike")]
-position = Vector2(2250, 275)
+position = Vector2(3375, 272.5)
 
 [node name="SpikeS3" parent="." instance=ExtResource("7_spike")]
-position = Vector2(4080, 275)
+position = Vector2(6120, 272.5)
 
 [node name="CP1" parent="." instance=ExtResource("6_checkpoint")]
-position = Vector2(480, 268)
+position = Vector2(720, 262)
 
 [node name="CP2" parent="." instance=ExtResource("6_checkpoint")]
-position = Vector2(940, 268)
+position = Vector2(1410, 262)
 
 [node name="CP3" parent="." instance=ExtResource("6_checkpoint")]
-position = Vector2(1600, 268)
+position = Vector2(2400, 262)
 
 [node name="CP4" parent="." instance=ExtResource("6_checkpoint")]
-position = Vector2(2160, 268)
+position = Vector2(3240, 262)
 
 [node name="CP5" parent="." instance=ExtResource("6_checkpoint")]
-position = Vector2(2680, 268)
+position = Vector2(4020, 262)
 
 [node name="CP6" parent="." instance=ExtResource("6_checkpoint")]
-position = Vector2(3340, 268)
+position = Vector2(5010, 262)
 
 [node name="CP7" parent="." instance=ExtResource("6_checkpoint")]
-position = Vector2(3900, 268)
+position = Vector2(5850, 262)
 
 [node name="CP8" parent="." instance=ExtResource("6_checkpoint")]
-position = Vector2(4160, 268)
+position = Vector2(6240, 262)
 
 [node name="BurnableB1" parent="." instance=ExtResource("14_burnable")]
-position = Vector2(820, 232)
+position = Vector2(1230, 208)
 
 [node name="BurnableB2" parent="." instance=ExtResource("14_burnable")]
-position = Vector2(2560, 232)
+position = Vector2(3840, 208)
 
 [node name="HeartH1" parent="." instance=ExtResource("15_heart")]
-position = Vector2(1984, 142)
+position = Vector2(2976, 73)
 
 [node name="HeartH2" parent="." instance=ExtResource("15_heart")]
-position = Vector2(3724, 142)
+position = Vector2(5586, 73)
 
 [node name="KillZone" type="Area2D" parent="."]
-position = Vector2(2250, 360)
+position = Vector2(3375, 400)
 collision_mask = 4
 script = ExtResource("8_killzone")
 
@@ -139,40 +140,40 @@ script = ExtResource("8_killzone")
 shape = SubResource("RectangleShape2D_kill")
 
 [node name="WalkerW1" parent="." instance=ExtResource("11_walker")]
-position = Vector2(640, 272)
+position = Vector2(960, 268)
 
 [node name="FlyerF1" parent="." instance=ExtResource("12_flyer")]
-position = Vector2(1100, 232)
+position = Vector2(1650, 208)
 
 [node name="JumperJ1" parent="." instance=ExtResource("13_jumper")]
-position = Vector2(1760, 272)
+position = Vector2(2640, 268)
 
 [node name="WalkerW2" parent="." instance=ExtResource("11_walker")]
-position = Vector2(2380, 272)
+position = Vector2(3570, 268)
 
 [node name="FlyerF2" parent="." instance=ExtResource("12_flyer")]
-position = Vector2(2840, 232)
+position = Vector2(4260, 208)
 
 [node name="JumperJ2" parent="." instance=ExtResource("13_jumper")]
-position = Vector2(3500, 272)
+position = Vector2(5250, 268)
 
 [node name="WalkerW3" parent="." instance=ExtResource("11_walker")]
-position = Vector2(3990, 272)
+position = Vector2(5985, 268)
 
 [node name="Boss" parent="." node_paths=PackedStringArray("player") instance=ExtResource("17_boss")]
-position = Vector2(4420, 268)
+position = Vector2(6630, 262)
 player = NodePath("../Player")
-arena_left_x = 4154.0
-arena_right_x = 4484.0
+arena_left_x = 6231.0
+arena_right_x = 6726.0
 
 [node name="BossGate" type="StaticBody2D" parent="."]
-position = Vector2(4130, 160)
+position = Vector2(6195, 100)
 script = ExtResource("2_block")
-size = Vector2(16, 400)
+size = Vector2(24, 600)
 style = 2
 
 [node name="Player" parent="." instance=ExtResource("3_player")]
-position = Vector2(40, 268)
+position = Vector2(60, 262)
 
 [node name="Camera2D" type="Camera2D" parent="Player" node_paths=PackedStringArray("player")]
 script = ExtResource("4_camera")
@@ -180,17 +181,18 @@ player = NodePath("..")
 stats = ExtResource("5_camstats")
 limit_left = 0
 limit_top = 0
-limit_right = 4500
+limit_right = 6750
 limit_bottom = 320
 
 [node name="Goal" parent="." node_paths=PackedStringArray("player", "arena") instance=ExtResource("16_goal")]
-position = Vector2(4420, 268)
+position = Vector2(6732, 262)
 player = NodePath("../Player")
 arena = NodePath("../BossArena")
 
 [node name="ClearLayer" type="CanvasLayer" parent="."]
 
 [node name="ClearLabel" type="Label" parent="ClearLayer"]
+theme = ExtResource("22_theme")
 visible = false
 anchors_preset = 15
 anchor_right = 1.0
@@ -200,7 +202,7 @@ grow_vertical = 2
 theme_override_colors/font_color = Color(1, 0.9, 0.2, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 6
-theme_override_font_sizes/font_size = 48
+theme_override_font_sizes/font_size = 44
 text = "클리어!"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -210,12 +212,12 @@ script = ExtResource("18_arena")
 player = NodePath("../Player")
 boss = NodePath("../Boss")
 gate = NodePath("../BossGate")
-trigger_x = 4176.0
+trigger_x = 6264.0
 respawn_manager = NodePath("../RespawnManager")
 message_label = NodePath("../ClearLayer/ClearLabel")
 message_text = "클리어!"
 camera = NodePath("../Player/Camera2D")
-fight_camera_limit_left = 4140
+fight_camera_limit_left = 6210
 
 [node name="RespawnManager" type="Node" parent="." node_paths=PackedStringArray("player", "checkpoints", "kill_zones", "enemies", "burnables", "bonus_hearts")]
 script = ExtResource("9_respawn")

@@ -4,9 +4,9 @@
 
 [resource]
 script = ExtResource("1_stats")
-move_speed = 120.0
-jump_velocity = -380.0
-gravity = 900.0
-max_fall_speed = 400.0
+move_speed = 180.0
+jump_velocity = -570.0
+gravity = 1350.0
+max_fall_speed = 600.0
 jump_cut_factor = 0.4
-stomp_bounce_velocity = -200.0
+stomp_bounce_velocity = -300.0

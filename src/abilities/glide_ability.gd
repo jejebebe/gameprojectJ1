@@ -15,7 +15,7 @@ extends Ability
 const EFFECT_NODE_NAME: StringName = &"GlideEffect"
 
 ## Fall speed cap while gliding, in pixels per second.
-@export var max_fall_speed: float = 60.0
+@export var max_fall_speed: float = 90.0
 
 @export_group("Parachute sprite sheet")
 ## Horizontal strip of the looping parachute animation.
@@ -27,7 +27,7 @@ const EFFECT_NODE_NAME: StringName = &"GlideEffect"
 ## Animation speed in frames per second.
 @export var effect_fps: float = 8.0
 ## Position of the effect relative to the player's centre.
-@export var effect_offset: Vector2 = Vector2(0, -22)
+@export var effect_offset: Vector2 = Vector2(0, -33)
 
 
 ## Caps the fall speed while gliding and shows or hides the parachute.

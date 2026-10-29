@@ -6,8 +6,8 @@ extends Ability
 ## feet. The big jump is never shortened by releasing the jump button.
 ##
 ## Jump height is v^2 / (2 * gravity), so for a height multiplier m the launch
-## speed is the normal jump speed * sqrt(m). With jump_velocity -380, gravity 900
-## and m = 1.8: normal 80 px, high jump about 144 px.
+## speed is the normal jump speed * sqrt(m). With jump_velocity -570, gravity 1350
+## and m = 1.8: normal about 120 px, high jump about 217 px.
 ##
 ## Implements: design/game-brief.md (MVP 3), story-004.
 ## Usage: `assets/data/abilities/high_jump.tres`.

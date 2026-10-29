@@ -4,10 +4,10 @@
 [ext_resource type="Resource" path="res://assets/data/enemies/jumper_stats.tres" id="2_stats"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_body"]
-size = Vector2(16, 16)
+size = Vector2(24, 24)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hit"]
-size = Vector2(20, 20)
+size = Vector2(30, 30)
 
 [node name="Jumper" type="CharacterBody2D"]
 collision_layer = 2
@@ -19,7 +19,6 @@ stats = ExtResource("2_stats")
 shape = SubResource("RectangleShape2D_body")
 
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
-position = Vector2(0, -4)
 
 [node name="HitArea" type="Area2D" parent="."]
 collision_layer = 0

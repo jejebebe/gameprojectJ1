@@ -24,7 +24,7 @@ const ANIM_FALL: StringName = &"fall"
 @export var art: PlayerArt
 
 ## Direction the player last moved in: 1.0 = right, -1.0 = left. Kept when the
-## player stops. Example: `camera.position.x = player.facing * 60.0`.
+## player stops. Example: `camera.position.x = player.facing * 90.0`.
 var facing: float = 1.0
 
 ## Health of this player (child node `Health`).

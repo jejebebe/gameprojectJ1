@@ -19,7 +19,7 @@ extends EnemyStats
 @export var hurt_time: float = 1.0
 ## Sideways speed (pixels per second) the player is pushed away at after
 ## stomping the boss, so one stomp cannot chain into the next hit.
-@export var stomp_knockback_speed: float = 160.0
+@export var stomp_knockback_speed: float = 240.0
 ## How long (seconds) that push overrides the player's left/right input.
 @export var stomp_knockback_time: float = 0.4
 ## Seconds between flash on/off while invulnerable.
@@ -39,17 +39,17 @@ extends EnemyStats
 
 @export_group("Charge")
 ## Pixels the boss steps back (away from the player) at the start of the telegraph.
-@export var charge_step_back: float = 28.0
+@export var charge_step_back: float = 42.0
 ## Seconds the step back takes.
 @export var charge_step_back_time: float = 0.3
 ## Rolling speed in pixels per second.
-@export var charge_speed: float = 230.0
+@export var charge_speed: float = 345.0
 ## Seconds the boss pauses after reaching the wall.
 @export var charge_recover_time: float = 0.8
 
 @export_group("Jump slam")
 ## Height of the leap arc in pixels.
-@export var jump_height: float = 110.0
+@export var jump_height: float = 165.0
 ## Seconds the leap lasts, take-off to landing.
 @export var jump_time: float = 0.8
 ## Seconds the boss is dazed after landing (the player's chance to stomp it).
@@ -59,13 +59,13 @@ extends EnemyStats
 ## Number of spikes that fall.
 @export var spike_count: int = 3
 ## Horizontal distance between neighbouring spikes in pixels (centred on the player).
-@export var spike_spacing: float = 56.0
+@export var spike_spacing: float = 84.0
 ## Seconds the shadow markers show before the spikes start to fall.
 @export var spike_shadow_time: float = 0.8
 ## Height above the floor the spikes start falling from, in pixels.
-@export var spike_fall_height: float = 200.0
+@export var spike_fall_height: float = 300.0
 ## Fall speed in pixels per second.
-@export var spike_fall_speed: float = 260.0
+@export var spike_fall_speed: float = 390.0
 ## Health the player loses when a spike hits.
 @export var spike_damage: int = 1
 ## Seconds a landed spike stays before it is removed.

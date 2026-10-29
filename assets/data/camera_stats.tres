@@ -4,5 +4,7 @@
 
 [resource]
 script = ExtResource("1_camstats")
-look_ahead_distance = 60.0
-look_ahead_speed = 180.0
+look_ahead_distance = 90.0
+look_ahead_speed = 270.0
+focus_weight = 0.5
+focus_player_margin = 36.0

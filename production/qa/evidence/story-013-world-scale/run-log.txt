@@ -1,0 +1,31 @@
+== traversal bot
+progress f=600 Level01 x=1836 lives=3
+progress f=1200 Level01 x=3170 lives=3
+progress f=1800 Level01 x=4469 lives=3
+LEVEL DONE (Level01) in 31.2s events=["x2735:fireball", "x4055:high_jump"]
+progress f=2400 Level02 x=1247 lives=3
+progress f=3000 Level02 x=2741 lives=3
+progress f=3600 Level02 x=3018 lives=3
+progress f=4200 Level02 x=4118 lives=3
+STUCK in Level02 at x=4734 y=261 events=["x1247:fireball", "x1247:high_jump", "x3089:fell", "x3092:fell", "x3095:fell", "x3098:fell", "x2693:glide", "x2873:fireball", "x3054:high_jump", "x3090:fell", "x3093:fell", "x3096:fell", "x3099:fell", "x2471:glide", "x2651:fireball", "x2831:high_jump", "x3012:glide", "x3827:fireball", "x3827:high_jump", "x4949:fell", "x4952:fell", "x4955:fell", "x4958:fell", "x4554:glide", "x4734:fireball"]
+== level 3 bot
+progress f=600 Level03 x=1370 lives=3
+progress f=1200 Level03 x=1629 lives=3
+STUCK in Level03 at x=1665 y=261 events=["x1205:fireball", "x2159:fell", "x2162:fell", "x2165:fell", "x2168:fell", "x1764:high_jump", "x1944:glide", "x2124:fireball", "x2175:fell", "x2178:fell", "x2181:fell", "x2184:fell", "x2187:fell", "x1764:high_jump", "x1944:glide", "x2124:fireball", "x2175:fell", "x2178:fell", "x2181:fell", "x2184:fell", "x2187:fell", "x1524:high_jump", "x1704:glide", "x1884:fireball", "x2064:high_jump", "x2157:fell", "x2160:fell", "x2163:fell", "x2166:fell", "x1485:glide", "x1665:fireball"]
+== targeted obstacle checks (glide pits, high-jump cliffs, burnable walls)
+L2 pit1 2940->3144 glide: landed (3420,262); L2 pit2 4800->5052 glide: landed (5280,262)
+L2 cliff1 high jump: on top (1500,82)
+L3 pit A 2010->2262 glide: landed (2490,262); L3 pit B 4620->4872 glide: landed (5100,262)
+L3 cliffs 1/2 high jump: crossed (3100,88)/(5710,88)
+L1 burnables B1/B2: burned by fireball (standing 90px away and touching)
+== boss fight
+BEFORE ENTRY (expect WAITING, gate open) WAITING hp=3 x=6630 y=262 inv=0.00 gate_layer=0
+AFTER ENTRY (expect gate closed layer 1, boss IDLE, cam limit 4140) cam_limit=6210 gate_layer=1 gate_vis=true IDLE hp=3 x=6630 y=262 inv=0.00
+CYCLE DONE f=867 player damage events (god mode)=6
+FIREBALL HIT (expect hp 2, HURT/flashing) HURT hp=2 x=6300 y=262 inv=1.87
+AFTER DEATH (expect hp 3, x 4420, gate layer 1, player x~4160, lives 8) TELEGRAPH hp=3 x=6669 y=262 inv=0.00 gate_layer=1 player=(6240.0, 262.0) lives=2 spikes_left=0
+f=1464 STOMP #1 on DAZED hp=3 x=6240 y=262 inv=0.00
+f=1586 STOMP #2 on IDLE hp=2 x=6240 y=262 inv=-0.02
+f=1712 STOMP #3 on IDLE hp=1 x=6240 y=262 inv=-0.02
+BOSS DEFEATED f=1717 stomps=3 label_vis=true text=클리어!
+GOAL triggered? (expect false) false

@@ -10,9 +10,9 @@ extends Ability
 ## Scene of the projectile.
 @export var fireball_scene: PackedScene
 ## Flight speed in pixels per second.
-@export var speed: float = 160.0
+@export var speed: float = 240.0
 ## Flight distance in pixels before the fireball burns out.
-@export var max_distance: float = 140.0
+@export var max_distance: float = 210.0
 
 @export_group("Flight sprite sheet")
 ## Horizontal strip of frames, drawn facing right.

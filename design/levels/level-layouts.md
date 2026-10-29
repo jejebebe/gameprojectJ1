@@ -3,138 +3,145 @@
 > **Source**: `level-designer` paper design, 2026-10-27; approved by the user 2026-10-28.
 > **Story**: `production/epics/jeis-adventure/story-005-levels-1-3.md`
 > **Status**: temporary block layout for the concept sample. Final art, tilemaps and volume come in full production.
+> **Scale**: world scaled ×1.5 on 2026-10-29 (user decision, story-013). x' = 1.5·x; y' = 280 − 1.5·(280 − y) (the ground line y=280 stays, heights above and below it ×1.5). Every number below is the scaled value.
 
 ## Conventions
 
-- All coordinates in px. Ground top y=280 (ground blocks 40 px thick, centre y=300). Level height 320 = camera view height (no vertical scroll).
-- **Platform**: x = centre, y = centre. Top = y-8, underside = y+8. y=240 gives top 232 (48 above ground) and 32 px clearance underneath.
-- **Cliff** (high-jump obstacle): a solid StaticBody2D block standing on the ground, top y=160 (120 above ground), height 120, centre y=220. A floating platform at y=160 would not block the path.
-- Walker and Jumper centre y=272, Flyer y=232, Checkpoint y=268, Spike y=275, Burnable wall y=232 (spans 184-280).
-- Bonus heart y=262 on the ground, y=142 on a cliff top.
-- Enemy patrol is centred on the placed x: Walker ±60 (40 px/s), Flyer ±80 (50 px/s, y 224-240 with bob), Jumper hops in place (~35 px every 1.6 s). Walkers do not turn at ledges, so every walker patrol sits on solid ground.
-- One kill zone under the whole level: centre (L/2, 360), width L+200. Walls at x=-8 and x=L+8. Camera `limit_right` = L.
+- All coordinates in px. Ground top y=280 (ground blocks 60 px thick, centre y=310). Level height 320 = camera view height (no vertical scroll; the highest element, a cliff-top heart, sits at y=73).
+- **Platform**: x = centre, y = centre. Top = y-12, underside = y+12. y=220 gives top 208 (72 above ground) and 48 px clearance underneath (player height 36).
+- **Cliff** (high-jump obstacle): a solid StaticBody2D block standing on the ground, top y=100 (180 above ground), height 180, centre y=190. A floating platform at y=100 would not block the path.
+- Walker and Jumper centre y=268, Flyer y=208, Checkpoint y=262, Spike y=272.5, Burnable wall y=208 (spans 136-280).
+- Bonus heart y=253 on the ground, y=73 on a cliff top.
+- Enemy patrol is centred on the placed x: Walker ±90 (60 px/s), Flyer ±120 (75 px/s, y 196-220 with bob), Jumper hops in place (~52 px every 1.6 s). Walkers do not turn at ledges, so every walker patrol sits on solid ground.
+- One kill zone under the whole level: centre (L/2, 400), width L+300, 60 thick. Walls 24 wide at x=-12 and x=L+12. Camera `limit_right` = L.
 - Respawn before the first checkpoint uses the level start.
 
 ## Level design rules (approved)
 
 1. **Giver before its obstacle, no checkpoint between them.** A checkpoint sits right before each giver enemy; there is no checkpoint between the giver and the obstacle it feeds. (Otherwise a death there respawns past the giver with no ability: softlock.)
 2. **One enemy per zone.** Between a checkpoint and the obstacle it feeds, the only enemy is that obstacle's giver. Every enemy grants an ability, so a second enemy could swap the ability by accident with no way back.
-3. **Gaps**: walker patrol edge to burnable wall >= 100 px (room to fire inside the 140 px fireball range); flyer patrol edge to glide pit >= 120 px run-up; >= 160 px clean runway before every glide pit.
-4. **Pits**: normal-jump pits <= 64 px (48-56 used). Glide pits <= 170 px: 136 px for the first, 168 px only as a later one.
-5. **Checkpoints** about every 500 px; glide sections may stretch to 560-660 px because of rules 1 and 4. Checkpoint >= 80 px past a pit edge.
-6. Flags and items >= 60 px from pit edges, spikes and patrol ranges; no item within 8 px of a checkpoint.
-7. **Accepted alternate solve**: in level 3 a carried high jump clears a 96 px burnable wall. Allowed.
-8. **Time target "2-3 minutes"** means typical play including deaths (user decision 2026-10-28). Clean runs are ~75 s / ~95 s / ~117 s.
+3. **Gaps**: walker patrol edge to burnable wall >= 150 px (room to fire inside the 210 px fireball range); flyer patrol edge to glide pit >= 180 px run-up; >= 240 px clean runway before every glide pit.
+4. **Pits**: normal-jump pits <= 96 px (72-84 used). Glide pits <= 255 px: 204 px for the first, 252 px only as a later one.
+5. **Checkpoints** about every 750 px; glide sections may stretch to 840-990 px because of rules 1 and 4. Checkpoint >= 120 px past a pit edge.
+6. Flags and items >= 90 px from pit edges, spikes and patrol ranges; no item within 12 px of a checkpoint.
+7. **Accepted alternate solve**: in level 3 a carried high jump clears a 144 px burnable wall. Allowed.
+8. **Time target "2-3 minutes"** means typical play including deaths (user decision 2026-10-28). Clean runs are ~75 s / ~95 s / ~117 s (unchanged by the ×1.5 scale: speeds scale too).
 
 ---
 
-## Level 1 "배우기" (L=3200)
+## Level 1 "배우기" (L=4800)
 
-Teaching order: walk and jump (spike, platform with heart) → first pit 48 px → a walker with no obstacle (stomp is safe, it gives fire) → two single spikes, pit 56 px → **wall 1** (checkpoint, giver walker, burnable, heart behind) → **wall 2** with a spike right behind → finale walker → goal.
-
-| x | Element | y | Note |
-|---|---|---|---|
-| 40 | Player start | 268 | |
-| 280 | Spike S1 | 275 | |
-| 400 | Platform w96 (352-448) | 240 | Heart H1 on it at (400, 222) |
-| 520 | Checkpoint CP1 | 268 | |
-| 700 | Walker A (patrol 640-760) | 272 | Teaching stomp; fire granted but not needed |
-| 880-928 | Pit 1 (48) | – | |
-| 1040 | CP2 | 268 | |
-| 1160 | Spike S2 | 275 | |
-| 1300 | Spike S3 | 275 | |
-| 1500 | CP3 | 268 | Before the giver |
-| 1660 | Walker B (patrol 1600-1720) | 272 | **Giver: fireball** |
-| 1840 | Burnable B1 (1832-1848) | 232 | |
-| 1950 | Heart H2 | 262 | Reward behind the wall |
-| 2000 | CP4 | 268 | |
-| 2200-2256 | Pit 2 (56) | – | Shrink to 48 if kids fall a lot |
-| 2360 | CP5 | 268 | Before the giver |
-| 2540 | Walker C (patrol 2480-2600) | 272 | **Giver: fireball** |
-| 2720 | Burnable B2 (2712-2728) | 232 | |
-| 2800 | Spike S4 | 275 | |
-| 2880 | CP6 | 268 | |
-| 3000 | Walker D (patrol 2940-3060) | 272 | Finale stomp |
-| 3140 | Goal flag | 268 | |
-
-Ground: [0-880] [928-2200] [2256-3200].
-
-## Level 2 "새 능력" (L=3800)
-
-Order: warm-up spike → **jumper → high jump → cliff 1** (heart on top) → recap pit 56 px + spike → **flyer → glide → 136 px pit** → jumper → cliff 2 (heart) → **flyer → 168 px pit** → spike → goal.
+Teaching order: walk and jump (spike, platform with heart) → first pit 72 px → a walker with no obstacle (stomp is safe, it gives fire) → two single spikes, pit 84 px → **wall 1** (checkpoint, giver walker, burnable, heart behind) → **wall 2** with a spike right behind → finale walker → goal.
 
 | x | Element | y | Note |
 |---|---|---|---|
-| 40 | Player start | 268 | |
-| 260 | Spike S1 | 275 | |
-| 400 | Platform w96 (352-448) | 240 | Optional |
-| 520 | CP1 | 268 | |
-| 680 | Jumper J1 | 272 | **Giver: high jump** |
-| 840-1000 | Cliff 1 (w160, top 160) | centre 220 | Heart H1 on top (920, 142) |
-| 1080 | CP2 | 268 | |
-| 1220-1276 | Pit P1 (56) | – | |
-| 1440 | Spike S2 | 275 | |
-| 1560 | CP3 | 268 | Before the giver |
-| 1720 | Flyer F1 (patrol 1640-1800) | 232 | **Giver: glide** |
-| 1960-2096 | Glide pit Gp1 (136) | – | |
-| 2220 | CP4 | 268 | |
-| 2400 | Jumper J2 | 272 | **Giver: high jump** |
-| 2560-2688 | Cliff 2 (w128, top 160) | centre 220 | Heart H2 on top (2624, 142) |
-| 2800 | CP5 | 268 | Before the giver |
-| 2980 | Flyer F2 (patrol 2900-3060) | 232 | **Giver: glide** |
-| 3200-3368 | Glide pit Gp2 (168) | – | |
-| 3460 | CP6 | 268 | |
-| 3580 | Spike S3 | 275 | |
-| 3740 | Goal flag | 268 | |
+| 60 | Player start | 262 | |
+| 420 | Spike S1 | 272.5 | |
+| 600 | Platform w144 (528-672) | 220 | Heart H1 on it at (600, 193) |
+| 780 | Checkpoint CP1 | 262 | |
+| 1050 | Walker A (patrol 960-1140) | 268 | Teaching stomp; fire granted but not needed |
+| 1320-1392 | Pit 1 (72) | – | |
+| 1560 | CP2 | 262 | |
+| 1740 | Spike S2 | 272.5 | |
+| 1950 | Spike S3 | 272.5 | |
+| 2250 | CP3 | 262 | Before the giver |
+| 2490 | Walker B (patrol 2400-2580) | 268 | **Giver: fireball** |
+| 2760 | Burnable B1 (2748-2772) | 208 | |
+| 2925 | Heart H2 | 253 | Reward behind the wall |
+| 3000 | CP4 | 262 | |
+| 3300-3384 | Pit 2 (84) | – | Shrink to 72 if kids fall a lot |
+| 3540 | CP5 | 262 | Before the giver |
+| 3810 | Walker C (patrol 3720-3900) | 268 | **Giver: fireball** |
+| 4080 | Burnable B2 (4068-4092) | 208 | |
+| 4200 | Spike S4 | 272.5 | |
+| 4320 | CP6 | 262 | |
+| 4500 | Walker D (patrol 4410-4590) | 268 | Finale stomp |
+| 4710 | Goal flag | 262 | |
 
-Ground: [0-1220] [1276-1960] [2096-3200] [3368-3800].
+Ground: [0-1320] [1392-3300] [3384-4800].
 
-## Level 3 "섞어 쓰기" (L=4500)
+## Level 2 "새 능력" (L=5700)
 
-Six sections alternate fire, glide, high jump, fire, glide, high jump — each one checkpoint, one giver, one obstacle. The flat stretch 4100-4500 is reserved for the boss arena (story 006); until then it ends with the goal flag.
+Order: warm-up spike → **jumper → high jump → cliff 1** (heart on top) → recap pit 84 px + spike → **flyer → glide → 204 px pit** → jumper → cliff 2 (heart) → **flyer → 252 px pit** → spike → goal.
 
 | x | Element | y | Note |
 |---|---|---|---|
-| 40 | Player start | 268 | |
-| 260 | Spike S1 | 275 | |
-| 380 | Platform w96 (332-428) | 240 | Optional |
-| 480 | CP1 | 268 | |
-| 640 | Walker W1 (patrol 580-700) | 272 | **Giver: fireball** |
-| 820 | Burnable B1 (812-828) | 232 | |
-| 940 | CP2 | 268 | |
-| 1100 | Flyer F1 (patrol 1020-1180) | 232 | **Giver: glide** |
-| 1340-1508 | Glide pit Gp1 (168) | – | |
-| 1600 | CP3 | 268 | |
-| 1760 | Jumper J1 | 272 | **Giver: high jump** |
-| 1920-2048 | Cliff 1 (w128, top 160) | centre 220 | Heart H1 on top (1984, 142) |
-| 2160 | CP4 | 268 | |
-| 2250 | Spike S2 | 275 | |
-| 2380 | Walker W2 (patrol 2320-2440) | 272 | **Giver: fireball** |
-| 2560 | Burnable B2 (2552-2568) | 232 | |
-| 2680 | CP5 | 268 | |
-| 2840 | Flyer F2 (patrol 2760-2920) | 232 | **Giver: glide** |
-| 3080-3248 | Glide pit Gp2 (168) | – | |
-| 3340 | CP6 | 268 | |
-| 3500 | Jumper J2 | 272 | **Giver: high jump** |
-| 3660-3788 | Cliff 2 (w128, top 160) | centre 220 | Heart H2 on top (3724, 142) |
-| 3900 | CP7 | 268 | |
-| 4080 | Spike S3 | 275 | |
-| 4220 | Spike S4 | 275 | |
-| 4420 | Goal flag | 268 | Boss hand-over point later |
+| 60 | Player start | 262 | |
+| 390 | Spike S1 | 272.5 | |
+| 600 | Platform w144 (528-672) | 220 | Optional |
+| 780 | CP1 | 262 | |
+| 1020 | Jumper J1 | 268 | **Giver: high jump** |
+| 1260-1500 | Cliff 1 (w240, top 100) | centre 190 | Heart H1 on top (1380, 73) |
+| 1620 | CP2 | 262 | |
+| 1830-1914 | Pit P1 (84) | – | |
+| 2160 | Spike S2 | 272.5 | |
+| 2340 | CP3 | 262 | Before the giver |
+| 2580 | Flyer F1 (patrol 2460-2700) | 208 | **Giver: glide** |
+| 2940-3144 | Glide pit Gp1 (204) | – | |
+| 3330 | CP4 | 262 | |
+| 3600 | Jumper J2 | 268 | **Giver: high jump** |
+| 3840-4032 | Cliff 2 (w192, top 100) | centre 190 | Heart H2 on top (3936, 73) |
+| 4200 | CP5 | 262 | Before the giver |
+| 4470 | Flyer F2 (patrol 4350-4590) | 208 | **Giver: glide** |
+| 4800-5052 | Glide pit Gp2 (252) | – | |
+| 5190 | CP6 | 262 | |
+| 5370 | Spike S3 | 272.5 | |
+| 5610 | Goal flag | 262 | |
 
-Ground: [0-1340] [1508-3080] [3248-4500].
+Ground: [0-1830] [1914-2940] [3144-4800] [5052-5700].
+
+## Level 3 "섞어 쓰기" (L=6750)
+
+Six sections alternate fire, glide, high jump, fire, glide, high jump — each one checkpoint, one giver, one obstacle. The flat stretch 6150-6750 is the boss arena (story 006).
+
+| x | Element | y | Note |
+|---|---|---|---|
+| 60 | Player start | 262 | |
+| 390 | Spike S1 | 272.5 | |
+| 570 | Platform w144 (498-642) | 220 | Optional |
+| 720 | CP1 | 262 | |
+| 960 | Walker W1 (patrol 870-1050) | 268 | **Giver: fireball** |
+| 1230 | Burnable B1 (1218-1242) | 208 | |
+| 1410 | CP2 | 262 | |
+| 1650 | Flyer F1 (patrol 1530-1770) | 208 | **Giver: glide** |
+| 2010-2262 | Glide pit Gp1 (252) | – | |
+| 2400 | CP3 | 262 | |
+| 2640 | Jumper J1 | 268 | **Giver: high jump** |
+| 2880-3072 | Cliff 1 (w192, top 100) | centre 190 | Heart H1 on top (2976, 73) |
+| 3240 | CP4 | 262 | |
+| 3375 | Spike S2 | 272.5 | |
+| 3570 | Walker W2 (patrol 3480-3660) | 268 | **Giver: fireball** |
+| 3840 | Burnable B2 (3828-3852) | 208 | |
+| 4020 | CP5 | 262 | |
+| 4260 | Flyer F2 (patrol 4140-4380) | 208 | **Giver: glide** |
+| 4620-4872 | Glide pit Gp2 (252) | – | |
+| 5010 | CP6 | 262 | |
+| 5250 | Jumper J2 | 268 | **Giver: high jump** |
+| 5490-5682 | Cliff 2 (w192, top 100) | centre 190 | Heart H2 on top (5586, 73) |
+| 5850 | CP7 | 262 | |
+| 5985 | Walker W3 | 268 | |
+| 6120 | Spike S3 | 272.5 | |
+| 6180 | Backdrop switch | – | `boss_switch_x`: boss background fades in |
+| 6195 | Boss gate (w24, 6183-6207) | centre 100 | Closes behind the player |
+| 6240 | CP8 | 262 | Inside the arena |
+| 6264 | Arena trigger | – | `trigger_x`; fight camera `limit_left` 6210 |
+| 6630 | Boss start (moves 6231-6726) | 262 | |
+| 6732 | Goal flag | 262 | Right end of the arena, inert until the boss is defeated |
+
+Ground: [0-2010] [2262-4620] [4872-6750].
 
 ---
 
 ## Playtest risks
 
-- **Flyer stomp window (biggest risk)**: a normal jump apex reaches only ~20 px into the flyer's height range. A kid who cannot stomp a flyer cannot get glide and cannot finish level 2. User decision 2026-10-28: keep the current height, play first, then decide (option: lower the flyer ~12 px).
-- Glide pits: 168 px leaves ~32 px margin; a late glide falls. The first glide pit is 136 px for that reason.
-- Cliff top margin is 25-30 px; lower the cliff to 112 px if kids miss.
+- **Flyer stomp window (biggest risk)**: a normal jump apex reaches only ~30 px into the flyer's height range. A kid who cannot stomp a flyer cannot get glide and cannot finish level 2. User decision 2026-10-28: keep the current height, play first, then decide (option: lower the flyer ~18 px).
+- Glide pits: 252 px leaves ~48 px margin; a late glide falls. The first glide pit in level 2 is 204 px for that reason.
+- Cliff top margin is 38-45 px; lower the cliff to 168 px if kids miss.
 - A kid who jumps over the giver walker reaches the wall without fire; they can walk back because the walker is still alive. Check that this reads clearly.
 - Level 3 is close to a repeat of levels 1 and 2; consider tighter chains in full production.
+- **Boss arena wider than the view (since the ×1.5 scale)**: the arena is ~543 px wide, the view 360 px. The fight camera scrolls inside the arena instead of showing all of it, so a telegraph can start off-screen.
 
 ## Open assumptions to confirm in play
 
-- No fall damage from the 120 px cliff drop (none exists today).
+- No fall damage from the 180 px cliff drop (none exists today).
 - Platforms are solid from below (head bump).

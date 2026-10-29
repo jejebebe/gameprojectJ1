@@ -4,10 +4,10 @@
 [ext_resource type="Resource" path="res://assets/data/enemies/flyer_stats.tres" id="2_stats"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_body"]
-size = Vector2(16, 16)
+size = Vector2(24, 24)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hit"]
-size = Vector2(20, 20)
+size = Vector2(30, 30)
 
 [node name="Flyer" type="CharacterBody2D"]
 collision_layer = 2
