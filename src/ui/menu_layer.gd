@@ -7,10 +7,14 @@ extends Control
 ##
 ## Main menu and level select cover the whole 360x640 column; the pause menu
 ## covers only the bottom control area so the paused game stays visible.
-## Buttons act on release and show a pressed look via `modulate`, so they work
-## the same with touch (emulated mouse) and mouse, with no hover needed.
+## Buttons act on release, so they work the same with touch (emulated mouse) and
+## mouse. Looks come from the scene's Theme (art bible §7): cream 9-slice
+## panels, navy 9-slice buttons whose `pressed` style draws the face 4 px lower
+## with a cream border (hover = normal, so no hover is needed), a red focus
+## ring for keyboard/gamepad, red ribbons behind the titles and medal icons on
+## the level buttons.
 ##
-## Implements: story-007 (menu and level select).
+## Implements: story-007 (menu and level select), story-012 (menu art).
 ## Usage: instance `menu_layer.tscn` over the column, connect the signals, then
 ## call `open_main()` / `open_pause()` / `close()`.
 
@@ -25,9 +29,6 @@ signal main_menu_requested
 
 ## Which menu is showing.
 enum Screen { NONE, MAIN, PAUSE, LEVEL_SELECT }
-
-## Colour multiplied onto a button while it is held down.
-@export var pressed_modulate: Color = Color(0.7, 0.7, 0.7)
 
 var _screen: Screen = Screen.NONE
 ## Menu that the level select's back button returns to.
@@ -58,10 +59,6 @@ func _ready() -> void:
 	for i: int in _level_buttons.size():
 		_level_buttons[i].pressed.connect(level_chosen.emit.bind(i))
 	_back_button.pressed.connect(_on_back_pressed)
-	for node: Node in find_children("*", "Button", true, false):
-		var button := node as Button
-		button.button_down.connect(_set_button_look.bind(button, true))
-		button.button_up.connect(_set_button_look.bind(button, false))
 	_show(Screen.NONE)
 
 
@@ -100,9 +97,6 @@ func _show(screen: Screen) -> void:
 	_main.visible = screen == Screen.MAIN
 	_pause.visible = screen == Screen.PAUSE
 	_select.visible = screen == Screen.LEVEL_SELECT
-	# Reset any pressed look left from a button that was hidden mid-press.
-	for node: Node in find_children("*", "Button", true, false):
-		(node as Button).modulate = Color.WHITE
 	# Keyboard / gamepad focus starts on the first button (separate from touch
 	# focus since 4.6, see docs/engine-reference/godot/modules/ui.md).
 	match screen:
@@ -112,7 +106,3 @@ func _show(screen: Screen) -> void:
 			_resume_button.grab_focus()
 		Screen.LEVEL_SELECT:
 			_level_buttons[0].grab_focus()
-
-
-func _set_button_look(button: Button, down: bool) -> void:
-	button.modulate = pressed_modulate if down else Color.WHITE

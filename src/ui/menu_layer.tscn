@@ -1,33 +1,54 @@
-[gd_scene load_steps=7 format=3]
+[gd_scene load_steps=17 format=3]
 
 [ext_resource type="Script" path="res://src/ui/menu_layer.gd" id="1_menu"]
+[ext_resource type="Texture2D" path="res://assets/art/ui/panels/panel_cream.png" id="2_panel"]
+[ext_resource type="Texture2D" path="res://assets/art/ui/buttons/button_navy.png" id="3_navy"]
+[ext_resource type="Texture2D" path="res://assets/art/ui/buttons/button_navy_pressed.png" id="4_pressed"]
+[ext_resource type="Texture2D" path="res://assets/art/ui/buttons/button_disabled.png" id="5_disabled"]
+[ext_resource type="Texture2D" path="res://assets/art/ui/icons/medal_1.png" id="6_medal1"]
+[ext_resource type="Texture2D" path="res://assets/art/ui/panels/ribbon_red.png" id="7_ribbon"]
+[ext_resource type="Texture2D" path="res://assets/art/ui/icons/medal_2.png" id="8_medal2"]
+[ext_resource type="Texture2D" path="res://assets/art/ui/icons/medal_3.png" id="9_medal3"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_panel"]
-bg_color = Color(0.1, 0.1, 0.14, 1)
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_panel"]
+texture = ExtResource("2_panel")
+texture_margin_left = 8.0
+texture_margin_top = 8.0
+texture_margin_right = 8.0
+texture_margin_bottom = 8.0
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_button"]
-bg_color = Color(0.95, 0.62, 0.22, 1)
-border_width_left = 4
-border_width_top = 4
-border_width_right = 4
-border_width_bottom = 4
-border_color = Color(0.55, 0.3, 0.08, 1)
-corner_radius_top_left = 12
-corner_radius_top_right = 12
-corner_radius_bottom_right = 12
-corner_radius_bottom_left = 12
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_button"]
+content_margin_left = 12.0
+content_margin_top = 12.0
+content_margin_right = 12.0
+content_margin_bottom = 16.0
+texture = ExtResource("3_navy")
+texture_margin_left = 12.0
+texture_margin_top = 12.0
+texture_margin_right = 12.0
+texture_margin_bottom = 12.0
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_button_pressed"]
-bg_color = Color(0.75, 0.45, 0.12, 1)
-border_width_left = 4
-border_width_top = 4
-border_width_right = 4
-border_width_bottom = 4
-border_color = Color(0.45, 0.24, 0.05, 1)
-corner_radius_top_left = 12
-corner_radius_top_right = 12
-corner_radius_bottom_right = 12
-corner_radius_bottom_left = 12
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_button_pressed"]
+content_margin_left = 12.0
+content_margin_top = 16.0
+content_margin_right = 12.0
+content_margin_bottom = 12.0
+texture = ExtResource("4_pressed")
+texture_margin_left = 12.0
+texture_margin_top = 12.0
+texture_margin_right = 12.0
+texture_margin_bottom = 12.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_button_disabled"]
+content_margin_left = 12.0
+content_margin_top = 12.0
+content_margin_right = 12.0
+content_margin_bottom = 12.0
+texture = ExtResource("5_disabled")
+texture_margin_left = 12.0
+texture_margin_top = 12.0
+texture_margin_right = 12.0
+texture_margin_bottom = 12.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_focus"]
 draw_center = false
@@ -35,7 +56,7 @@ border_width_left = 3
 border_width_top = 3
 border_width_right = 3
 border_width_bottom = 3
-border_color = Color(1, 1, 1, 1)
+border_color = Color(0.824, 0.216, 0.247, 1)
 corner_radius_top_left = 12
 corner_radius_top_right = 12
 corner_radius_bottom_right = 12
@@ -46,15 +67,19 @@ expand_margin_right = 4.0
 expand_margin_bottom = 4.0
 
 [sub_resource type="Theme" id="Theme_menu"]
-Button/colors/font_color = Color(0.16, 0.09, 0.03, 1)
-Button/colors/font_hover_color = Color(0.16, 0.09, 0.03, 1)
-Button/colors/font_pressed_color = Color(0.16, 0.09, 0.03, 1)
-Button/colors/font_focus_color = Color(0.16, 0.09, 0.03, 1)
-Button/styles/normal = SubResource("StyleBoxFlat_button")
-Button/styles/hover = SubResource("StyleBoxFlat_button")
-Button/styles/pressed = SubResource("StyleBoxFlat_button_pressed")
+Button/colors/font_color = Color(0.965, 0.933, 0.894, 1)
+Button/colors/font_disabled_color = Color(0.188, 0.125, 0.188, 0.6)
+Button/colors/font_focus_color = Color(0.965, 0.933, 0.894, 1)
+Button/colors/font_hover_color = Color(0.965, 0.933, 0.894, 1)
+Button/colors/font_hover_pressed_color = Color(0.965, 0.933, 0.894, 1)
+Button/colors/font_pressed_color = Color(0.965, 0.933, 0.894, 1)
+Button/styles/disabled = SubResource("StyleBoxTexture_button_disabled")
 Button/styles/focus = SubResource("StyleBoxFlat_focus")
-Panel/styles/panel = SubResource("StyleBoxFlat_panel")
+Button/styles/hover = SubResource("StyleBoxTexture_button")
+Button/styles/hover_pressed = SubResource("StyleBoxTexture_button_pressed")
+Button/styles/normal = SubResource("StyleBoxTexture_button")
+Button/styles/pressed = SubResource("StyleBoxTexture_button_pressed")
+Panel/styles/panel = SubResource("StyleBoxTexture_panel")
 
 [node name="MenuLayer" type="Control"]
 process_mode = 3
@@ -92,9 +117,33 @@ grow_vertical = 2
 theme_override_constants/separation = 20
 alignment = 1
 
-[node name="Title" type="Label" parent="MainMenu/Box"]
+[node name="Title" type="Control" parent="MainMenu/Box"]
+custom_minimum_size = Vector2(280, 48)
 layout_mode = 2
-theme_override_font_sizes/font_size = 36
+mouse_filter = 2
+
+[node name="Ribbon" type="NinePatchRect" parent="MainMenu/Box/Title"]
+layout_mode = 0
+offset_right = 140.0
+offset_bottom = 24.0
+scale = Vector2(2, 2)
+mouse_filter = 2
+texture = ExtResource("7_ribbon")
+patch_margin_left = 16
+patch_margin_right = 16
+
+[node name="Label" type="Label" parent="MainMenu/Box/Title"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.965, 0.933, 0.894, 1)
+theme_override_colors/font_shadow_color = Color(0.188, 0.125, 0.188, 1)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
+theme_override_font_sizes/font_size = 33
 text = "제이의 모험"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -102,13 +151,13 @@ vertical_alignment = 1
 [node name="StartButton" type="Button" parent="MainMenu/Box"]
 custom_minimum_size = Vector2(280, 80)
 layout_mode = 2
-theme_override_font_sizes/font_size = 28
+theme_override_font_sizes/font_size = 22
 text = "시작하기"
 
 [node name="LevelSelectButton" type="Button" parent="MainMenu/Box"]
 custom_minimum_size = Vector2(280, 80)
 layout_mode = 2
-theme_override_font_sizes/font_size = 28
+theme_override_font_sizes/font_size = 22
 text = "레벨 선택"
 
 [node name="PauseMenu" type="Panel" parent="."]
@@ -140,19 +189,19 @@ alignment = 1
 [node name="ResumeButton" type="Button" parent="PauseMenu/Box"]
 custom_minimum_size = Vector2(280, 72)
 layout_mode = 2
-theme_override_font_sizes/font_size = 26
+theme_override_font_sizes/font_size = 22
 text = "계속하기"
 
 [node name="LevelSelectButton" type="Button" parent="PauseMenu/Box"]
 custom_minimum_size = Vector2(280, 72)
 layout_mode = 2
-theme_override_font_sizes/font_size = 26
+theme_override_font_sizes/font_size = 22
 text = "레벨 선택"
 
 [node name="MainMenuButton" type="Button" parent="PauseMenu/Box"]
 custom_minimum_size = Vector2(280, 72)
 layout_mode = 2
-theme_override_font_sizes/font_size = 26
+theme_override_font_sizes/font_size = 22
 text = "처음 화면으로"
 
 [node name="LevelSelect" type="Panel" parent="."]
@@ -179,9 +228,33 @@ grow_vertical = 2
 theme_override_constants/separation = 16
 alignment = 1
 
-[node name="Title" type="Label" parent="LevelSelect/Box"]
+[node name="Title" type="Control" parent="LevelSelect/Box"]
+custom_minimum_size = Vector2(280, 48)
 layout_mode = 2
-theme_override_font_sizes/font_size = 32
+mouse_filter = 2
+
+[node name="Ribbon" type="NinePatchRect" parent="LevelSelect/Box/Title"]
+layout_mode = 0
+offset_right = 140.0
+offset_bottom = 24.0
+scale = Vector2(2, 2)
+mouse_filter = 2
+texture = ExtResource("7_ribbon")
+patch_margin_left = 16
+patch_margin_right = 16
+
+[node name="Label" type="Label" parent="LevelSelect/Box/Title"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.965, 0.933, 0.894, 1)
+theme_override_colors/font_shadow_color = Color(0.188, 0.125, 0.188, 1)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
+theme_override_font_sizes/font_size = 33
 text = "레벨 선택"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -189,23 +262,26 @@ vertical_alignment = 1
 [node name="Level1Button" type="Button" parent="LevelSelect/Box"]
 custom_minimum_size = Vector2(280, 80)
 layout_mode = 2
-theme_override_font_sizes/font_size = 28
+theme_override_font_sizes/font_size = 22
 text = "레벨 1"
+icon = ExtResource("6_medal1")
 
 [node name="Level2Button" type="Button" parent="LevelSelect/Box"]
 custom_minimum_size = Vector2(280, 80)
 layout_mode = 2
-theme_override_font_sizes/font_size = 28
+theme_override_font_sizes/font_size = 22
 text = "레벨 2"
+icon = ExtResource("8_medal2")
 
 [node name="Level3Button" type="Button" parent="LevelSelect/Box"]
 custom_minimum_size = Vector2(280, 80)
 layout_mode = 2
-theme_override_font_sizes/font_size = 28
+theme_override_font_sizes/font_size = 22
 text = "레벨 3"
+icon = ExtResource("9_medal3")
 
 [node name="BackButton" type="Button" parent="LevelSelect/Box"]
 custom_minimum_size = Vector2(280, 72)
 layout_mode = 2
-theme_override_font_sizes/font_size = 24
+theme_override_font_sizes/font_size = 22
 text = "뒤로"

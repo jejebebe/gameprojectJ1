@@ -1,6 +1,43 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene load_steps=18 format=3]
 
 [ext_resource type="Script" path="res://src/ui/touch_controls.gd" id="1_controls"]
+[ext_resource type="Texture2D" path="res://assets/art/ui/buttons/button_navy.png" id="2_navy"]
+[ext_resource type="Texture2D" path="res://assets/art/ui/buttons/button_navy_pressed.png" id="3_pressed"]
+[ext_resource type="Texture2D" path="res://assets/art/ui/buttons/button_disabled.png" id="4_disabled"]
+[ext_resource type="Texture2D" path="res://assets/art/ui/panels/control_panel.png" id="5_panel"]
+[ext_resource type="Texture2D" path="res://assets/art/ui/icons/left.png" id="6_left"]
+[ext_resource type="Texture2D" path="res://assets/art/ui/icons/right.png" id="7_right"]
+[ext_resource type="Texture2D" path="res://assets/art/ui/icons/jump.png" id="8_jump"]
+[ext_resource type="Texture2D" path="res://assets/art/ui/icons/menu.png" id="9_menu"]
+[ext_resource type="Texture2D" path="res://assets/art/ui/icons/ability_none.png" id="10_none"]
+[ext_resource type="Texture2D" path="res://assets/art/ui/icons/ability_fireball.png" id="11_fireball"]
+[ext_resource type="Texture2D" path="res://assets/art/ui/icons/ability_high_jump.png" id="12_high_jump"]
+[ext_resource type="Texture2D" path="res://assets/art/ui/icons/ability_glide.png" id="13_glide"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_navy"]
+texture = ExtResource("2_navy")
+texture_margin_left = 12.0
+texture_margin_top = 12.0
+texture_margin_right = 12.0
+texture_margin_bottom = 12.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_pressed"]
+texture = ExtResource("3_pressed")
+texture_margin_left = 12.0
+texture_margin_top = 12.0
+texture_margin_right = 12.0
+texture_margin_bottom = 12.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_disabled"]
+texture = ExtResource("4_disabled")
+texture_margin_left = 12.0
+texture_margin_top = 12.0
+texture_margin_right = 12.0
+texture_margin_bottom = 12.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_panel"]
+texture = ExtResource("5_panel")
+texture_margin_top = 2.0
 
 [node name="TouchControls" type="Control"]
 layout_mode = 3
@@ -11,6 +48,25 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("1_controls")
+normal_style = SubResource("StyleBoxTexture_navy")
+pressed_style = SubResource("StyleBoxTexture_pressed")
+disabled_style = SubResource("StyleBoxTexture_disabled")
+ability_icons = Dictionary[StringName, Texture2D]({
+&"fireball": ExtResource("11_fireball"),
+&"glide": ExtResource("13_glide"),
+&"high_jump": ExtResource("12_high_jump")
+})
+ability_none_icon = ExtResource("10_none")
+
+[node name="Background" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_panel")
 
 [node name="BottomCluster" type="Control" parent="."]
 layout_mode = 1
@@ -31,16 +87,25 @@ offset_top = 116.0
 offset_right = 118.0
 offset_bottom = 226.0
 mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_navy")
 
-[node name="Label" type="Label" parent="BottomCluster/LeftButton"]
+[node name="Icon" type="TextureRect" parent="BottomCluster/LeftButton"]
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-text = "<"
-horizontal_alignment = 1
-vertical_alignment = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -32.0
+offset_top = -34.0
+offset_right = 32.0
+offset_bottom = 30.0
+grow_horizontal = 2
+grow_vertical = 2
 mouse_filter = 2
+texture = ExtResource("6_left")
+expand_mode = 1
+stretch_mode = 5
 
 [node name="RightButton" type="Panel" parent="BottomCluster"]
 layout_mode = 0
@@ -49,16 +114,25 @@ offset_top = 116.0
 offset_right = 236.0
 offset_bottom = 226.0
 mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_navy")
 
-[node name="Label" type="Label" parent="BottomCluster/RightButton"]
+[node name="Icon" type="TextureRect" parent="BottomCluster/RightButton"]
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-text = ">"
-horizontal_alignment = 1
-vertical_alignment = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -32.0
+offset_top = -34.0
+offset_right = 32.0
+offset_bottom = 30.0
+grow_horizontal = 2
+grow_vertical = 2
 mouse_filter = 2
+texture = ExtResource("7_right")
+expand_mode = 1
+stretch_mode = 5
 
 [node name="JumpButton" type="Panel" parent="BottomCluster"]
 layout_mode = 0
@@ -67,16 +141,25 @@ offset_top = 116.0
 offset_right = 352.0
 offset_bottom = 226.0
 mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_navy")
 
-[node name="Label" type="Label" parent="BottomCluster/JumpButton"]
+[node name="Icon" type="TextureRect" parent="BottomCluster/JumpButton"]
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-text = "JUMP"
-horizontal_alignment = 1
-vertical_alignment = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -32.0
+offset_top = -34.0
+offset_right = 32.0
+offset_bottom = 30.0
+grow_horizontal = 2
+grow_vertical = 2
 mouse_filter = 2
+texture = ExtResource("8_jump")
+expand_mode = 1
+stretch_mode = 5
 
 [node name="AbilityButton" type="Panel" parent="BottomCluster"]
 layout_mode = 0
@@ -84,16 +167,25 @@ offset_left = 180.0
 offset_right = 280.0
 offset_bottom = 100.0
 mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_disabled")
 
-[node name="Label" type="Label" parent="BottomCluster/AbilityButton"]
+[node name="Icon" type="TextureRect" parent="BottomCluster/AbilityButton"]
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-text = "ABILITY"
-horizontal_alignment = 1
-vertical_alignment = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -32.0
+offset_top = -34.0
+offset_right = 32.0
+offset_bottom = 30.0
+grow_horizontal = 2
+grow_vertical = 2
 mouse_filter = 2
+texture = ExtResource("10_none")
+expand_mode = 1
+stretch_mode = 5
 
 [node name="MenuButton" type="Panel" parent="."]
 layout_mode = 0
@@ -102,13 +194,22 @@ offset_top = 8.0
 offset_right = 352.0
 offset_bottom = 72.0
 mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_navy")
 
-[node name="Label" type="Label" parent="MenuButton"]
+[node name="Icon" type="TextureRect" parent="MenuButton"]
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-text = "MENU"
-horizontal_alignment = 1
-vertical_alignment = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -32.0
+offset_top = -34.0
+offset_right = 32.0
+offset_bottom = 30.0
+grow_horizontal = 2
+grow_vertical = 2
 mouse_filter = 2
+texture = ExtResource("9_menu")
+expand_mode = 1
+stretch_mode = 5

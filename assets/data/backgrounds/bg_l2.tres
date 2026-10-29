@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="BackgroundSet" load_steps=6 format=3]
+
+[ext_resource type="Script" path="res://src/levels/background_set.gd" id="1_script"]
+[ext_resource type="Texture2D" path="res://assets/art/backgrounds/l2/l0_sky.png" id="2_sky"]
+[ext_resource type="Texture2D" path="res://assets/art/backgrounds/l2/l1_clouds.png" id="3_clouds"]
+[ext_resource type="Texture2D" path="res://assets/art/backgrounds/l2/l2_far.png" id="4_far"]
+[ext_resource type="Texture2D" path="res://assets/art/backgrounds/l2/l3_town.png" id="5_town"]
+
+[resource]
+script = ExtResource("1_script")
+textures = Array[Texture2D]([ExtResource("2_sky"), ExtResource("3_clouds"), ExtResource("4_far"), ExtResource("5_town")])
+scroll_factors = PackedFloat32Array(0, 0.1, 0.25, 0.5)
+drift_speeds = PackedFloat32Array(0, -3, 0, 0)
+top_y = 0.0

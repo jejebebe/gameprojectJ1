@@ -108,6 +108,7 @@ func _load_level(index: int, carried_lives: int) -> void:
 	if carried_lives > 0:
 		level.respawn_manager.set_lives(carried_lives)
 	_hud.bind(level.player.health, level.respawn_manager, level.player.ability_holder)
+	_touch_controls.bind_ability_holder(level.player.ability_holder)
 	level.completed.connect(_on_level_completed)
 	level.respawn_manager.game_over.connect(_on_game_over)
 	_hud.visible = true

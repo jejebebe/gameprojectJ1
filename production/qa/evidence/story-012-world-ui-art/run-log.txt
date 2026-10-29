@@ -1,0 +1,14 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+OpenGL API 3.3.0 NVIDIA 592.82 - Compatibility - Using Device: NVIDIA - NVIDIA GeForce RTX 4060 Laptop GPU
+SHOT 01-main-menu.png
+SHOT 02-level1-start.png
+SHOT 03-level1-mid.png
+SHOT 04-level1-burnable.png
+SHOT 05-level1-goal.png
+SHOT 06-pause-menu.png
+SHOT 07-level-select.png
+SHOT 08-level2.png
+SHOT 09-level2-ability-icon.png
+SHOT 10-level3.png
+SHOT 11-level3-before-arena.png
+SHOT 12-boss-arena.png

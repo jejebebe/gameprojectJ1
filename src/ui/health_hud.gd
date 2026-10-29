@@ -7,40 +7,15 @@ extends Control
 ##
 ## Hearts: `max_health` slots. Full hearts = min(current, max_health), the rest
 ## of the slots are empty. Health above `max_health` (bonus) adds up to
-## `stats.max_bonus_hearts` extra hearts in `bonus_color` after the base ones.
-## Placeholder art is drawn from the pixel patterns below (real art: story 005).
+## `stats.max_bonus_hearts` extra hearts drawn with `heart_bonus_texture` after
+## the base ones. Hearts and the life icon are textures (art bible §7: navy
+## 2 px outline baked in, empty heart = same silhouette, hollow) drawn at an
+## integer `icon_scale`; the ability icon is still drawn from the ability's
+## pixel pattern.
 ##
-## Implements: design/game-brief.md (MVP 6), story-008.
+## Implements: design/game-brief.md (MVP 6), story-008, story-012.
 ## Usage: instance `health_hud.tscn` under a CanvasLayer (so the camera does not
 ## move it) and assign `health`, `respawn_manager` and `ability_holder`.
-
-## Pixel patterns, one string per row; "#" is a filled pixel.
-const HEART_PATTERN: PackedStringArray = [
-	".##.##.",
-	"#######",
-	"#######",
-	".#####.",
-	"..###..",
-	"...#...",
-]
-## Border of `HEART_PATTERN` (same silhouette, hollow inside), used for empty
-## slots so full and empty hearts differ by shape, not by colour alone.
-const HEART_OUTLINE_PATTERN: PackedStringArray = [
-	".##.##.",
-	"#..#..#",
-	"#.....#",
-	".#...#.",
-	"..#.#..",
-	"...#...",
-]
-const LIFE_ICON_PATTERN: PackedStringArray = [
-	"..###..",
-	".#####.",
-	"#######",
-	"#######",
-	".#####.",
-	"..###..",
-]
 
 ## Source of `health_changed`.
 @export var health: HealthComponent
@@ -50,23 +25,26 @@ const LIFE_ICON_PATTERN: PackedStringArray = [
 @export var ability_holder: AbilityHolder
 
 @export_group("Hearts")
-## Screen pixels per pattern pixel (integer keeps the art crisp).
-@export var pixel_size: int = 3
+## Screen pixels per texture pixel for hearts and the life icon (integer keeps
+## the art crisp). Example: 16x16 art at `icon_scale = 2` is 32x32 on screen.
+@export var icon_scale: int = 2
 ## Gap in screen pixels between two hearts.
 @export var heart_spacing: int = 4
 ## Distance in screen pixels from the top-left corner to the first heart.
-@export var margin: Vector2i = Vector2i(6, 4)
-@export var full_color: Color = Color(0.9, 0.15, 0.2)
-## Colour of the outline drawn for an empty heart slot.
-@export var empty_color: Color = Color(0.85, 0.85, 0.9)
-@export var bonus_color: Color = Color(0.2, 0.75, 1.0)
+@export var margin: Vector2i = Vector2i(8, 8)
+@export var heart_full_texture: Texture2D
+## Hollow heart drawn for an empty slot (differs by shape, not colour alone).
+@export var heart_empty_texture: Texture2D
+@export var heart_bonus_texture: Texture2D
 
 @export_group("Ability")
+## Screen pixels per pattern pixel of the ability icon pattern.
+@export var pixel_size: int = 3
 ## Gap in screen pixels between the lives icon row and the ability icon below it.
 @export var ability_icon_gap: int = 6
 
 @export_group("Lives")
-@export var life_icon_color: Color = Color(1.0, 0.8, 0.2)
+@export var life_icon_texture: Texture2D
 ## Gap in screen pixels between the life icon and the number.
 @export var life_icon_gap: int = 4
 ## Format of the number text; receives the lives left.
@@ -132,25 +110,26 @@ func _draw() -> void:
 		return
 	var bonus: int = clampi(_current_health - _max_health, 0, health.stats.max_bonus_hearts)
 	var full: int = mini(_current_health, _max_health)
-	var heart_step: int = HEART_PATTERN[0].length() * pixel_size + heart_spacing
 	for i: int in _max_health + bonus:
-		var color: Color = full_color
-		var pattern: PackedStringArray = HEART_PATTERN
+		var texture: Texture2D = heart_full_texture
 		if i >= _max_health:
-			color = bonus_color
+			texture = heart_bonus_texture
 		elif i >= full:
-			color = empty_color
-			pattern = HEART_OUTLINE_PATTERN
-		_draw_pattern(pattern,Vector2(margin.x + i * heart_step, margin.y), color)
-	var icon_width: int = LIFE_ICON_PATTERN[0].length() * pixel_size
-	_draw_pattern(
-		LIFE_ICON_PATTERN,
-		Vector2(_lives_label.position.x - life_icon_gap - icon_width, margin.y),
-		life_icon_color
-	)
+			texture = heart_empty_texture
+		if texture == null:
+			continue
+		var heart_size: Vector2 = texture.get_size() * icon_scale
+		var heart_x: float = margin.x + i * (heart_size.x + heart_spacing)
+		draw_texture_rect(texture, Rect2(Vector2(heart_x, margin.y), heart_size), false)
+	var life_height: float = 0.0
+	if life_icon_texture != null:
+		var life_size: Vector2 = life_icon_texture.get_size() * icon_scale
+		life_height = life_size.y
+		var life_x: float = _lives_label.position.x - life_icon_gap - life_size.x
+		draw_texture_rect(life_icon_texture, Rect2(Vector2(life_x, margin.y), life_size), false)
 	if _ability != null and not _ability.icon_pattern.is_empty():
 		var ability_width: int = _ability.icon_pattern[0].length() * pixel_size
-		var ability_top: int = margin.y + LIFE_ICON_PATTERN.size() * pixel_size + ability_icon_gap
+		var ability_top: float = margin.y + life_height + ability_icon_gap
 		_draw_pattern(
 			_ability.icon_pattern,
 			Vector2(size.x - margin.x - ability_width, ability_top),

@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=5 format=3]
 
 [ext_resource type="Script" path="res://src/items/bonus_heart.gd" id="1_script"]
+[ext_resource type="Texture2D" path="res://assets/art/props/heart.png" id="2_sheet"]
+[ext_resource type="Script" path="res://src/levels/looping_strip.gd" id="3_strip"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_area"]
 size = Vector2(14, 12)
@@ -12,3 +14,10 @@ script = ExtResource("1_script")
 
 [node name="Shape" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_area")
+
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
+script = ExtResource("3_strip")
+sheet = ExtResource("2_sheet")
+frame_size = Vector2i(24, 24)
+frame_count = 6
+fps = 9.09091

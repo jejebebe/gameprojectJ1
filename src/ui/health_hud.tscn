@@ -1,6 +1,10 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene load_steps=6 format=3]
 
 [ext_resource type="Script" path="res://src/ui/health_hud.gd" id="1_hud"]
+[ext_resource type="Texture2D" path="res://assets/art/ui/hud/heart_full.png" id="2_full"]
+[ext_resource type="Texture2D" path="res://assets/art/ui/hud/heart_empty.png" id="3_empty"]
+[ext_resource type="Texture2D" path="res://assets/art/ui/hud/heart_bonus.png" id="4_bonus"]
+[ext_resource type="Texture2D" path="res://assets/art/ui/hud/life_icon.png" id="5_life"]
 
 [node name="HealthHud" type="Control"]
 layout_mode = 3
@@ -10,18 +14,23 @@ offset_bottom = 52.0
 grow_horizontal = 2
 mouse_filter = 2
 script = ExtResource("1_hud")
+heart_full_texture = ExtResource("2_full")
+heart_empty_texture = ExtResource("3_empty")
+heart_bonus_texture = ExtResource("4_bonus")
+life_icon_texture = ExtResource("5_life")
 
 [node name="LivesLabel" type="Label" parent="."]
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -46.0
-offset_right = -6.0
-offset_bottom = 26.0
+offset_left = -48.0
+offset_top = 8.0
+offset_right = -8.0
+offset_bottom = 40.0
 grow_horizontal = 0
 mouse_filter = 2
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0.188, 0.125, 0.188, 1)
 theme_override_constants/outline_size = 4
 theme_override_font_sizes/font_size = 16
 text = "x 0"
